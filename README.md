@@ -1,8 +1,7 @@
 
-# F5 CIS Lab . (Work in progress)
+# F5 CIS Azure Lab . (Work in progress)
 
 Create a Lab environment to test CIS use-cases
-
 
 
 ## Table of Contents
@@ -11,7 +10,7 @@ Create a Lab environment to test CIS use-cases
 - [Pre-requisites](#pre-requisites)
 - [Installation](#installation)
 - [Variables](#variables)
-- [Support](#support)
+
 
 ## Introduction
 
@@ -132,15 +131,15 @@ Most of the variables can be found on `variables.tf` on the `tf` directories. Pl
 
 ######### Azure authentication variables #########
 
-variable subscription_id  		{}
-variable client_id				    {}
-variable client_secret  		  {}
-variable tenant_id				    {}
+variable subscription_id      {}
+variable client_id            {}
+variable client_secret        {}
+variable tenant_id            {}
 
 
 #########   Common Variables   ##########
-variable tag 					{default = "CIS - Kubernetes Demo"}
-variable password		  		    {}
+variable tag        {default = "CIS - Kubernetes Demo"}
+variable password	      {}
 variable username		  	    	{}
 variable location				      {}
 variable rg_prefix			    	{}
@@ -178,15 +177,12 @@ variable f5_image_name 			  {default = "f5-bigip-virtual-edition-25m-best-hourly
 variable f5_product_name 		  {default = "f5-big-ip-best"}
 variable f5_instance_type 		{default = "Standard_DS4_v2"}
 variable do_url 				      {default = "https://github.com/F5Networks/f5-declarative-onboarding/releases/download/v1.21.0/f5-declarative-onboarding-1.21.0-3.noarch.rpm"}
-variable as3_url 				      {default = "https://github.com/F5Networks/f5-appsvcs-extension/releases/download/v3.28.0/f5-appsvcs-3.28.0-3.noarch.rpm"}
-variable ts_url 				      {default = "https://github.com/F5Networks/f5-telemetry-streaming/releases/download/v1.20.0/f5-telemetry-1.20.0-3.noarch.rpm" }
-variable cfe_url 				      {default = "https://github.com/F5Networks/f5-cloud-failover-extension/releases/download/v1.8.0/f5-cloud-failover-1.8.0-0.noarch.rpm" }
-variable fast_url 				    {default = "https://github.com/F5Networks/f5-appsvcs-templates/releases/download/v1.9.0/f5-appsvcs-templates-1.9.0-1.noarch.rpm" }
+variable as3_url      {default = "https://github.com/F5Networks/f5-appsvcs-extension/releases/download/v3.28.0/f5-appsvcs-3.28.0-3.noarch.rpm"}
+variable ts_url       {default = "https://github.com/F5Networks/f5-telemetry-streaming/releases/download/v1.20.0/f5-telemetry-1.20.0-3.noarch.rpm" }
+variable cfe_url      {default = "https://github.com/F5Networks/f5-cloud-failover-extension/releases/download/v1.8.0/f5-cloud-failover-1.8.0-0.noarch.rpm" }
+variable fast_url     {default = "https://github.com/F5Networks/f5-appsvcs-templates/releases/download/v1.9.0/f5-appsvcs-templates-1.9.0-1.noarch.rpm" }
 
 ```
 
-
-
-## Support
 
 

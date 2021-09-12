@@ -1,12 +1,14 @@
 ---
 - hosts: master
-  become: true
-  gather_facts: yes
+  gather_facts: no
   tasks:    
   - name: Download Git Repository
     git:
       repo: https://github.com/skenderidis/f5-cis-lab
       dest: /home/{{ansible_user}}/f5-cis-lab
+
+  - name: Remove kubernetes directory
+    file: path=/home/{{ansible_user}}/kubernetes state=absent
 
   - name: Move kubernetes to different directory
     command: mv /home/{{ansible_user}}/f5-cis-lab/kubernetes /home/{{ansible_user}}/kubernetes
@@ -30,6 +32,7 @@
     command: kubectl apply -f kubernetes/5-Nginx-Deployments
 
   - name: Generate BIGIP-Secret YAML file
+    become: true
     template:
       src=templates/bigip-secret.j2
       dest=/home/{{ansible_user}}/kubernetes/6-cis/bigip-secret.yml

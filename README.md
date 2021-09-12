@@ -61,8 +61,18 @@ In order for the terraform scripts to work it will require the following variabl
 | rg_prefix	         |  The prefix for resource groups that will be created   |
 
 
-It is recommended to use Environment variables to set the above TF variables. Run the commands below (modify them first with the correct values).
+It is recommended to use Environment variables to set the above TF variables. Navigate to `f5-cis-lab` directory and edit the `export.sh` bash script.
+
 ```shell
+cd f5-cis-lab/
+sudo nano export.sh
+```
+
+The contents of the `export.sh` script are shown below
+```shell
+#!/usr/bin/env bash
+# Filename: export.sh
+
 export TF_VAR_subscription_id=YOUR_SUBSCRIPTION_ID
 export TF_VAR_client_id=YOUR_CLIENT_ID
 export TF_VAR_client_secret=YOUR_CLIENT_SECRET
@@ -73,15 +83,20 @@ export TF_VAR_location=YOUR_LOCATION
 export TF_VAR_rg_prefix=YOUR_LOCATION
 ```
 
+Once complete run the `export.sh` script
+```shell
+./export.sh
+```
 
-Once the Environment variables have been set navigate to `f5-cis-lab` directory. Run the `deploy.sh` script to create the entire environment Terraform.
+
+Once the Environment variables have been set run the `deploy.sh` script to create and configure the entire environment with Terraform and Ansible.
 ```shell
 cd f5-cis-lab/
 ./deploy.sh
 ```
 
 
-The Bash script is shown below
+The `deploy.sh` script is shown below
 
 ```shell
 #!/usr/bin/env bash
@@ -117,8 +132,6 @@ ansible-playbook deploy-nginx-cis.yml -i k8s-inventory.ini
 #terraform init
 #terraform apply --auto-approve
 ######################################################################################### 
-
-
 
 ```
 

@@ -1,0 +1,8 @@
+# {{ ansible_managed }}
+127.0.0.1   localhost 
+::1         localhost
+
+{% for item in groups['master'] | intersect(groups['nodes']) %}
+{% set short_name = item.split('.') %}
+{{ hostvars[item]['node_ip'] }}  {{ short_name[0] }}
+{% endfor %}

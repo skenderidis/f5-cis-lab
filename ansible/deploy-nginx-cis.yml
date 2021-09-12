@@ -1,0 +1,28 @@
+---
+- hosts: master
+  gather_facts: no
+  tasks:
+  - name: Download Git Repository
+    git:
+      repo: https://github.com/skenderidis/f5-kubernetes
+      dest: /home/{{ansible_user}}/f5-kubernetes
+
+  - name: Deploy Apps and Services
+    command: kubectl apply -f f5-kubernetes/Demo-1/1-apps
+
+  - name: Deploy Nginx RBAC
+    command: kubectl apply -f f5-kubernetes/Demo-1/2-Nginx-RBAC
+
+  - name: Deploy NGINX Resources
+    command: kubectl apply -f f5-kubernetes/Demo-1/3-Nginx-Resources
+
+  - name: Deploy NGINX CRDs
+    command: kubectl apply -f f5-kubernetes/Demo-1/4-Nginx-CRDs
+
+  - name: Deploy NGINX Controller
+    command: kubectl apply -f f5-kubernetes/Demo-1/5-Nginx-Deployments
+
+  - name: Deploy CIS Resources (CRD mode)
+    command: kubectl apply -f f5-kubernetes/Demo-1/6-cis
+
+ 

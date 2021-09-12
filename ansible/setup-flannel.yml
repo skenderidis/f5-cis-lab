@@ -1,0 +1,70 @@
+---
+- hosts: master
+  become: true
+  tasks:
+  - name: Install flannel on K8s
+    become: false
+    command: kubectl create -f https://github.com/coreos/flannel/raw/master/Documentation/kube-flannel.yml
+
+
+- name: Configuring F5 for Flannel
+  hosts: bigip
+  connection: local
+  gather_facts: false
+  vars:
+    provider:
+      password: "{{ f5_pass}}"
+      server: "{{inventory_hostname}}"
+      user: "{{f5_user}}"
+      validate_certs: no
+      server_port: 443
+
+  tasks:
+  - name: create Flannel Vxlan Profile
+    bigip_command:
+      commands:
+        - tmsh create net tunnels vxlan fl-vxlan { app-service none port 8472 flooding-type none }
+      provider: "{{ provider }}"
+    delegate_to: localhost
+
+  - name: create Flannel Vxlan
+    bigip_command:
+      commands:
+        - tmsh create net tunnels tunnel fl-tunnel { app-service none key 1 local-address 10.1.20.4 profile fl-vxlan }
+      provider: "{{ provider }}"
+    delegate_to: localhost
+
+
+  - name: create Flannel Vxlan self IP
+    bigip_command:
+      commands:
+        - tmsh create net self fl-vxlan-selfip { address 10.244.20.1/16 vlan fl-tunnel allow-service all }
+      provider: "{{ provider }}"
+    delegate_to: localhost
+
+  - name: show MAC address
+    bigip_command:
+      commands:
+        - tmsh show net tunnels tunnel fl-tunnel all-properties | grep MAC | sed -n 's/.*\(\([0-9A-Za-z][0-9A-Za-z]:\)\{5\}[0-9A-Za-z][0-9A-Za-z]\).*/\1/p'
+      provider: "{{ provider }}"
+    register: flannel_mac_address
+    delegate_to: localhost
+
+  - name: Copy MAC command to local file.
+    become: no
+    local_action: copy content="{{ flannel_mac_address.stdout[0] }}" dest="mac_address"
+
+
+- hosts: master
+  gather_facts: false
+  vars:
+     mac_address: "{{ lookup('file', 'mac_address') }}"  
+  tasks:
+  - name: Generate bigip node file for Flannel
+    template:
+      src=bigip_node_template.j2
+      dest=/home/{{ansible_user}}/bigip_node.yml
+  - name: Install flannel
+    become: false
+    command: kubectl create -f bigip_node.yml
+

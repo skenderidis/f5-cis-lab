@@ -1,0 +1,18 @@
+[master]
+{{k8s_master_ip}} node_ip=10.10.50.10 short=master
+
+[nodes]
+{{k8s_node01_ip}} node_ip=10.10.50.20 short=node01
+{{k8s_node02_ip}} node_ip=10.10.50.30 short=node02
+
+[bigip]
+{{mgmt_ip}} f5_user={{f5_user}} f5_pass={{f5_pass}}
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+ansible_connection=ssh
+ansible_user={{f5_user}}
+ansible_ssh_pass={{f5_pass}}
+k8s_version=1.20.9-00
+docker_version=5:20.10.7*
+containerd_version=1.4.6-1

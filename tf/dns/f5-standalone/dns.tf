@@ -4,7 +4,7 @@
 
 
 locals {
-  f5_data = jsondecode(file("../../../../f5.json"))
+  f5_data = jsondecode(file("../../../f5.json"))
 }
 
 

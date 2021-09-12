@@ -15,14 +15,23 @@ Create a Lab environment to test CIS use-cases
 
 ## Introduction
 
-The purpose of this repository is to create a Lab environment in Azure or AWS that we will be able to demo CIS use cases.<br>
-With the use of Terraform we will deploy the following infrastructure in Azure (or AWS):
+The purpose of this repository is to create a Lab environment on Azure that we will be able to demo CIS use cases.<br>
+We will use Terraform to perform the following:
 * F5 VPC
 * 1xBIGIP (25Mbps PAYG - Best)
 * K8s VPC
 * 3x Ubuntu 18.04.2 (1xMaster and 2xNodes)
+* VPC Peering, Security Groups, Public IPs, etc.
+* Ansible Dynamic invetories
 
 <img src="https://raw.githubusercontent.com/skenderidis/f5-cis-lab/main/images/cis-lab-1.png">
+
+We will use Ansible to perform the following:
+* Provision the F5 appliance with Declerative Onboarding.
+* Configure Kubernetes on the 3 ubuntu VMs
+* Configure Flannel between BIGIP and Ubuntu Nodes/Master
+* Create Apps/Namespaces/NGINX/CIS on Kubernetes
+
 
 ## Pre-requisistes
 
@@ -30,7 +39,7 @@ With the use of Terraform we will deploy the following infrastructure in Azure (
 - Ansible installed
 - Programmatic Access for Azure 
 
-> will update the instructions on Programmatic access on Azure
+> (to-do) will update the instructions on Programmatic access on Azure
 
 ## Installation
 
@@ -53,7 +62,7 @@ In order for the terraform scripts to work it will require the following variabl
 | rg_prefix	         |  The prefix for resource groups that will be created   |
 
 
-It is recommended to use Environment variables to set the above TF variables. 
+It is recommended to use Environment variables to set the above TF variables. Run the commands below (modify them first with the correct values).
 ```shell
 export TF_VAR_subscription_id=YOUR_SUBSCRIPTION_ID
 export TF_VAR_client_id=YOUR_CLIENT_ID
@@ -66,7 +75,7 @@ export TF_VAR_rg_prefix=YOUR_LOCATION
 ```
 
 
-Once the Environment variables have been set navigate to f5-cis-lab directory where you will find the `deploy.sh`  bash script. Run the command `./deploy.sh` to create the entire environment Terraform.
+Once the Environment variables have been set navigate to `f5-cis-lab` directory. Run the `deploy.sh` script to create the entire environment Terraform.
 ```shell
 cd f5-cis-lab/
 ./deploy.sh
@@ -115,208 +124,66 @@ ansible-playbook deploy-nginx-cis.yml -i k8s-inventory.ini
 ```
 
 
-
-
 ### Variables
 
-Most of the variables can be found on variables.tf under Demo-1 or Demo-2 directories
+Most of the variables can be found on `variables.tf` on the `tf` directories. Please see below the example on the `f5_standalone` directory.
 
 ```shell
-variable "region" {
-  default     = "eu-central-1"
-  description = "AWS region"
-}
 
-variable f5_username {
-  description = "The admin username of the F5 Bigip that will be deployed"
-  type        = string
-  default     = "bigipuser"
-}
+######### Azure authentication variables #########
 
-variable f5_password {
-  description = "Password of the F5 Bigip that will be deployed"
-  default     = "Bigip123"
-}
+variable subscription_id  		{}
+variable client_id				    {}
+variable client_secret  		  {}
+variable tenant_id				    {}
 
-variable f5_ami_search_name {
-  description = "BIG-IP AMI name to search for"
-  type        = string
-  default     = "F5 BIGIP-16* PAYG-Best 200Mbps*"
-}
 
-variable ec2_instance_type {
-  description = "AWS EC2 instance type"
-  type        = string
-  default     = "m5.xlarge"
-}
+#########   Common Variables   ##########
+variable tag 					{default = "CIS - Kubernetes Demo"}
+variable password		  		    {}
+variable username		  	    	{}
+variable location				      {}
+variable rg_prefix			    	{}
 
-## Please check and update the latest DO URL from https://github.com/F5Networks/f5-declarative-onboarding/releases
-# always point to a specific version in order to avoid inadvertent configuration inconsistency
-variable DO_URL {
-  description = "URL to download the BIG-IP Declarative Onboarding module"
-  type        = string
-  default     = "https://github.com/F5Networks/f5-declarative-onboarding/releases/download/v1.21.0/f5-declarative-onboarding-1.21.0-3.noarch.rpm"
-}
-## Please check and update the latest AS3 URL from https://github.com/F5Networks/f5-appsvcs-extension/releases/latest 
-# always point to a specific version in order to avoid inadvertent configuration inconsistency
-variable AS3_URL {
-  description = "URL to download the BIG-IP Application Service Extension 3 (AS3) module"
-  type        = string
-  default     = "https://github.com/F5Networks/f5-appsvcs-extension/releases/download/v3.28.0/f5-appsvcs-3.28.0-3.noarch.rpm"
-}
+###########   F5  Variables   ############
+variable f5_rg_name				    {default = "bigip-rg" }
+variable f5_vnet_name  			  {default = "secure_vnet"}
+variable f5_vnet_cidr  			  {default = "10.1.0.0/16" }
 
-## Please check and update the latest TS URL from https://github.com/F5Networks/f5-telemetry-streaming/releases/latest 
-# always point to a specific version in order to avoid inadvertent configuration inconsistency
-variable TS_URL {
-  description = "URL to download the BIG-IP Telemetry Streaming module"
-  type        = string
-  default     = "https://github.com/F5Networks/f5-telemetry-streaming/releases/download/v1.20.0/f5-telemetry-1.20.0-3.noarch.rpm"
-}
+variable mgmt_subnet_name		  {default = "management"}
+variable int_subnet_name  		{default = "internal"}
+variable ext_subnet_name  		{default = "external" }
 
-## Please check and update the latest Failover Extension URL from https://github.com/f5devcentral/f5-cloud-failover-extension/releases/latest 
-# always point to a specific version in order to avoid inadvertent configuration inconsistency
-variable CFE_URL {
-  description = "URL to download the BIG-IP Cloud Failover Extension module"
-  type        = string
-  default     = "https://github.com/F5Networks/f5-cloud-failover-extension/releases/download/v1.8.0/f5-cloud-failover-1.8.0-0.noarch.rpm"
-}
+variable mgmt_subnet_cidr		  {default = "10.1.1.0/24" }
+variable int_subnet_cidr  		{default = "10.1.20.0/24" }
+variable ext_subnet_cidr  		{default = "10.1.10.0/24" }
 
-## Please check and update the latest FAST URL from https://github.com/F5Networks/f5-appsvcs-templates/releases/latest 
-# always point to a specific version in order to avoid inadvertent configuration inconsistency
-variable FAST_URL {
-  description = "URL to download the BIG-IP FAST module"
-  type        = string
-  default     = "https://github.com/F5Networks/f5-appsvcs-templates/releases/download/v1.9.0/f5-appsvcs-templates-1.9.0-1.noarch.rpm"
-}
-## Please check and update the latest runtime init URL from https://github.com/F5Networks/f5-bigip-runtime-init/releases/latest
-# always point to a specific version in order to avoid inadvertent configuration inconsistency
-variable INIT_URL {
-  description = "URL to download the BIG-IP runtime init"
-  type        = string
-  default     = "https://cdn.f5.com/product/cloudsolutions/f5-bigip-runtime-init/v1.2.1/dist/f5-bigip-runtime-init-1.2.1-1.gz.run"
-}
+variable self_ip_mgmt_01  		{default = "10.1.1.4"}
+variable self_ip_ext_01  		  {default = "10.1.10.4"}
+variable add_ip_ext_01_1  		{default = "10.1.10.10"}
+variable add_ip_ext_01_2  		{default = "10.1.10.20"}
+variable add_ip_ext_01_3  		{default = "10.1.10.30"}
+variable self_ip_int_01  		  {default = "10.1.20.4"}
+variable prefix_bigip  			  {default = "bigip1"}
+
+variable allowedIPs				    {default = ["0.0.0.0/0"]}
+
+
+########################
+#  F5 Image related	   #
+########################
+
+variable f5_version 			    {default = "15.1.201000"}
+variable f5_image_name 			  {default = "f5-bigip-virtual-edition-25m-best-hourly" }
+variable f5_product_name 		  {default = "f5-big-ip-best"}
+variable f5_instance_type 		{default = "Standard_DS4_v2"}
+variable do_url 				      {default = "https://github.com/F5Networks/f5-declarative-onboarding/releases/download/v1.21.0/f5-declarative-onboarding-1.21.0-3.noarch.rpm"}
+variable as3_url 				      {default = "https://github.com/F5Networks/f5-appsvcs-extension/releases/download/v3.28.0/f5-appsvcs-3.28.0-3.noarch.rpm"}
+variable ts_url 				      {default = "https://github.com/F5Networks/f5-telemetry-streaming/releases/download/v1.20.0/f5-telemetry-1.20.0-3.noarch.rpm" }
+variable cfe_url 				      {default = "https://github.com/F5Networks/f5-cloud-failover-extension/releases/download/v1.8.0/f5-cloud-failover-1.8.0-0.noarch.rpm" }
+variable fast_url 				    {default = "https://github.com/F5Networks/f5-appsvcs-templates/releases/download/v1.9.0/f5-appsvcs-templates-1.9.0-1.noarch.rpm" }
 
 ```
-
-
-### Declerative Onboarding (DO)
-
-DO declaration will run during the `runtime init` process. The Declaration can be found on the folder `modules => bigip => f5_onboard.tmpl`
-
-
-```shell
-        schemaVersion: 1.0.0
-        class: Device
-        async: true
-        label: Onboard BIG-IP
-        Common:
-          class: Tenant
-          mySystem:
-            class: System
-            hostname: ${hostname}
-          myDns:
-            class: DNS
-            nameServers:
-              - 8.8.8.8
-              - 169.254.169.253
-            search:
-              - f5.com
-          admin:
-            class: User
-            userType: regular
-            password: ${bigip_password}
-            shell: bash
-          myNtp:
-            class: NTP
-            servers:
-              - 169.254.169.123
-            timezone: UTC
-          external:
-            class: VLAN
-            tag: 4093
-            mtu: 1500
-            interfaces:
-              - name: '1.1'
-                tagged: false
-            cmpHash: dst-ip
-          external-selfip:
-            class: SelfIp
-            address: ${self-ip-ext}/24
-            vlan: external
-            allowService: none
-            trafficGroup: traffic-group-local-only
-          default:
-            class: Route
-            gw: ${gateway}
-            network: default
-            mtu: 1500
-          servers-route:
-            class: Route
-            gw: ${gateway_servers}
-            network: 10.0.0.0/16
-            mtu: 1500
-          internal:
-            class: VLAN
-            tag: 4094
-            mtu: 1500
-            interfaces:
-              - name: '1.2'
-                tagged: false
-            cmpHash: dst-ip
-          internal-selfip:
-            class: SelfIp
-            address: ${self-ip-int}/24
-            vlan: internal
-            allowService: default
-            trafficGroup: traffic-group-local-only
-          configsync:
-            class: ConfigSync
-            configsyncIp: "/Common/internal-selfip/address"
-          failoverAddress:
-            class: FailoverUnicast
-            address: "/Common/internal-selfip/address"
-          failoverGroup:
-            class: DeviceGroup
-            type: sync-failover
-            members:
-            - ${self-ip-int}
-            - ${ha_remote_f5}
-            owner: ${ha_primary_f5}
-            autoSync: false
-            saveOnAutoSync: false
-            networkFailover: true
-            fullLoadOnSync: false
-            asmSync: false
-          trust:
-            class: DeviceTrust
-            localUsername: admin
-            localPassword: ${bigip_password}
-            remoteHost: ${ha_remote_f5}
-            remoteUsername: admin
-            remotePassword: ${bigip_password}
-
-```
-
-
-### Variables
-
-Most of the variables can be found on variables.tf under Demo-1 or Demo-2 directories
-
-
-
-
-The most common variables that you might want to chage are:
-
-
-These BIG-IP versions are supported in these Terraform versions.
-
-| Variables       | Default |	Terraform 0.13  |	Terraform 0.12  | Terraform 0.11  |
-|-----------------|---------------|-----------------|-----------------|-----------------|
-| BIG-IP 16.x	    |      X        |       X         |       X         |      X          |
-| BIG-IP 15.x	    |      X        |       X         |       X         |      X          |
-| BIG-IP 14.x	    | 	   X        |       X         |       X         |      X          |
-| BIG-IP 12.x	    |      X        |      	X         |       X         |      X          | 
-| BIG-IP 13.x	    |      X        |       X         |       X         |      X          |
 
 
 

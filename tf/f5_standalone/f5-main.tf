@@ -213,11 +213,11 @@ module "azure_f5" {
 
 resource "null_resource" "create-f5json" {
   provisioner "local-exec" {
-    command = "echo '{\"mgmt_ip\":\"${module.azure_f5.mgmt_public_ip}\", \"app1_ip\":\"${azurerm_public_ip.pip_app1.ip_address}\", \"app2_ip\":\"${azurerm_public_ip.pip_app2.ip_address}\", \"app3_ip\":\"${azurerm_public_ip.pip_app3.ip_address}\", \"f5_user\":\"${var.username}\", \"f5_pass\":\"${var.password}\"}' > ../../../f5.json"
+    command = "echo '{\"mgmt_ip\":\"${module.azure_f5.mgmt_public_ip}\", \"app1_ip\":\"${azurerm_public_ip.pip_app1.ip_address}\", \"app2_ip\":\"${azurerm_public_ip.pip_app2.ip_address}\", \"app3_ip\":\"${azurerm_public_ip.pip_app3.ip_address}\", \"f5_user\":\"${var.username}\", \"f5_pass\":\"${var.password}\"}' > ../../f5.json"
 }
   provisioner "local-exec" {
     when    = destroy
-    command = "rm ../../../f5.json"
+    command = "rm ../../f5.json"
     on_failure = continue
 }
 
@@ -225,11 +225,11 @@ resource "null_resource" "create-f5json" {
 
 resource "null_resource" "create-file-for-peering" {
   provisioner "local-exec" {
-    command = "echo '{\"rg_name\":\"${azurerm_resource_group.f5_rg.name}\", \"vnet_name\":\"${azurerm_virtual_network.f5_vnet.name}\"}' > ../../../f5_info.json"
+    command = "echo '{\"rg_name\":\"${azurerm_resource_group.f5_rg.name}\", \"vnet_name\":\"${azurerm_virtual_network.f5_vnet.name}\"}' > ../../f5_info.json"
 }
   provisioner "local-exec" {
     when    = destroy
-    command = "rm ../../../f5_info.json"
+    command = "rm ../../f5_info.json"
     on_failure = continue
 }
 

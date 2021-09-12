@@ -142,12 +142,12 @@ module "node02" {
 
 resource "null_resource" "create-json" {
     provisioner "local-exec" {
-      command = "echo '{\"k8s_master_ip\":\"${module.master.public_ip}\", \"k8s_node01_ip\":\"${module.node01.public_ip}\", \"k8s_node02_ip\":\"${module.node02.public_ip}\"}' > ../../../k8s.json"
+      command = "echo '{\"k8s_master_ip\":\"${module.master.public_ip}\", \"k8s_node01_ip\":\"${module.node01.public_ip}\", \"k8s_node02_ip\":\"${module.node02.public_ip}\"}' > ../../k8s.json"
   }
 
     provisioner "local-exec" {
       when    = destroy
-      command = "rm ../../../k8s.json"
+      command = "rm ../../k8s.json"
       on_failure = continue
   }
 }
@@ -155,11 +155,11 @@ resource "null_resource" "create-json" {
 
 resource "null_resource" "create-file-for-peering" {
   provisioner "local-exec" {
-    command = "echo '{\"rg_name\":\"${azurerm_resource_group.k8s_rg.name}\", \"vnet_name\":\"${azurerm_virtual_network.k8s_vnet.name}\"}' > ../../../k8s_info.json"
+    command = "echo '{\"rg_name\":\"${azurerm_resource_group.k8s_rg.name}\", \"vnet_name\":\"${azurerm_virtual_network.k8s_vnet.name}\"}' > ../../k8s_info.json"
 }
   provisioner "local-exec" {
     when    = destroy
-    command = "rm ../../../k8s_info.json"
+    command = "rm ../../k8s_info.json"
     on_failure = continue
 }
 

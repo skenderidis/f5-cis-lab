@@ -15,6 +15,8 @@ k8s_info.json
 k8s.json
 k8s-inventory.ini
 *.hcl
+f5-inventory.ini
+mac_address
 
 
 # Ignore any .tfvars files that are generated automatically for each Terraform run. Most

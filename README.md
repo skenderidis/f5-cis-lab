@@ -22,7 +22,7 @@ With the use of Terraform we will deploy the following infrastructure in Azure (
 * K8s VPC
 * 3x Ubuntu 18.04.2 (1xMaster and 2xNodes)
 
-[![Network Diagram](https://raw.githubusercontent.com/skenderidis/f5-cis-lab/main/images/cis-lab-1.png)]()
+<img src="https://raw.githubusercontent.com/skenderidis/f5-cis-lab/main/images/cis-lab-1.png">
 
 ## Pre-requisistes
 
@@ -31,8 +31,6 @@ With the use of Terraform we will deploy the following infrastructure in Azure (
 - Programmatic Access for Azure 
 
 > will update the instructions on Programmatic access on Azure
-<img src="https://raw.githubusercontent.com/skenderidis/f5-cis-lab/main/images/cis-lab-1.png">
-
 
 ## Installation
 
@@ -41,13 +39,36 @@ Use git pull to make a local copy of the github repo.
 git clone https://github.com/skenderidis/f5-cis-lab.git
 ```
 
-Navigate to the F5 standalone directory
+In order for the terraform scripts to work it will require the following variables. 
+
+
+| Variables          | Default |	Terraform 0.13  |	Terraform 0.12  | Terraform 0.11  |
+|--------------------|---------------|-----------------|-----------------|-----------------|
+| subscription_id	   |           |
+| client_id	         |      |
+| client_secret      | 	 sadfasd |
+| tenant_id          |   asd  | 
+| username	         |   asd       |
+| password	         |    asd      |
+| location	         |    asd  |
+| rg_prefix	         |     asd   |
+
+
+
+
 ```shell
-cd f5-cis-lab/tf
+cd f5-cis-lab/tf/azure/f5_standalone
 ```
-Run the following command to initialize Terraform
+
+
+Navigate to the terraform directory to deploy the F5 VE
 ```shell
-terraform init 
+cd f5-cis-lab/tf/azure/f5_standalone
+```
+Run the following command to initialize andTerraform
+```shell
+terraform init
+terraform apply --auto-approve 
 ```
 
 Run the command `terraform plan` to see the changes that are going to be made.

@@ -41,24 +41,35 @@ git clone https://github.com/skenderidis/f5-cis-lab.git
 
 In order for the terraform scripts to work it will require the following variables. 
 
-
 | Variables          | Default  |
 |--------------------|-------------------------------|
 | subscription_id	   |  The subscription ID for Azure Authentication  |
 | client_id	         |  The client ID for Azure Authentication    |
 | client_secret      | 	The client secret for Azure Authentication |
 | tenant_id          |  The Tenant ID for Azure Authentication  | 
-| username	         |  The username that will be used for F5 devices. Note: Do not use "admin"      |
-| password	         |  The password that will be used for F5 devices. Note: avoid using special characters like '"^{}\/?><'       |
-| location	         |    asd  |
-| rg_prefix	         |     asd   |
+| username	         |  The username that will be used for F5/Linux devices. Note: Do not use "admin"      |
+| password	         |  The password that will be used for F5/Linux devices. Note: avoid using special characters like `'"^{}\/?><`       |
+| location	         |  The location that the lab will be deployed (like eastus)  |
+| rg_prefix	         |  The prefix for resource groups that will be created   |
 
 
-
-
+It is recommended to use Environment variables to set the above TF variables. 
 ```shell
 cd f5-cis-lab/tf/azure/f5_standalone
 ```
+```shell
+cd f5-cis-lab/tf/azure/f5_standalone
+```
+```shell
+cd f5-cis-lab/tf/azure/f5_standalone
+```
+```shell
+cd f5-cis-lab/tf/azure/f5_standalone
+```
+```shell
+cd f5-cis-lab/tf/azure/f5_standalone
+```
+
 
 
 Navigate to the terraform directory to deploy the F5 VE

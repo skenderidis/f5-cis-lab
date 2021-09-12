@@ -1,10 +1,24 @@
 #!/usr/bin/env bash
 # Filename: deploy.sh
+cd tf/f5_standalone
+terraform init
+terraform apply --auto-approve
+
+
+cd ../k8s
+terraform init
+terraform apply --auto-approve
+
+
+cd ../peering/
+terraform init
+terraform apply --auto-approve
 
 
 
-cd ansible
+cd ../../ansible
 ansible-playbook create-inventories.yml
+ansible-playbook do-standalone.yml -i k8s-inventory.ini
 ansible-playbook setup-k8s.yml -i k8s-inventory.ini
 ansible-playbook setup-flannel.yml -i k8s-inventory.ini
 ansible-playbook deploy-nginx-cis.yml -i k8s-inventory.ini

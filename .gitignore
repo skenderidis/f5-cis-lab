@@ -9,6 +9,13 @@
 .DS_Store
 # Crash log files
 crash.log
+f5_info.json
+f5.json
+k8s_info.json
+k8s.json
+k8s-inventory.ini
+*.hcl
+
 
 # Ignore any .tfvars files that are generated automatically for each Terraform run. Most
 # .tfvars files are managed as part of configuration and so should be included in

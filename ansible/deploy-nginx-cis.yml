@@ -1,6 +1,7 @@
 ---
 - hosts: master
-  gather_facts: no
+  become: true
+  gather_facts: yes
   tasks:    
   - name: Download Git Repository
     git:
@@ -28,5 +29,10 @@
   - name: Deploy NGINX Controller
     command: kubectl apply -f kubernetes/5-Nginx-Deployments
 
-#  - name: Deploy CIS Resources (CRD mode)
-#    command: kubectl apply -f kubernetes/6-cis
+  - name: Generate BIGIP-Secret YAML file
+    template:
+      src=templates/bigip-secret.j2
+      dest=/home/{{ansible_user}}/kubernetes/6-cis/bigip-secret.yml
+      
+  - name: Deploy CIS Resources (CRD mode)
+    command: kubectl apply -f kubernetes/6-cis

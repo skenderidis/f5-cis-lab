@@ -55,21 +55,26 @@ In order for the terraform scripts to work it will require the following variabl
 
 It is recommended to use Environment variables to set the above TF variables. 
 ```shell
-cd f5-cis-lab/tf/azure/f5_standalone
+export TF_VAR_subscription_id=YOUR_SUBSCRIPTION_ID
 ```
 ```shell
-cd f5-cis-lab/tf/azure/f5_standalone
+export TF_VAR_client_id=YOUR_CLIENT_ID
 ```
 ```shell
-cd f5-cis-lab/tf/azure/f5_standalone
+export TF_VAR_client_secret=YOUR_CLIENT_SECRET
 ```
 ```shell
-cd f5-cis-lab/tf/azure/f5_standalone
+export TF_VAR_tenant_id=YOUR_TENANT_ID
 ```
 ```shell
-cd f5-cis-lab/tf/azure/f5_standalone
+export TF_VAR_username=YOUR_USERNAME
 ```
-
+```shell
+export TF_VAR_password=YOUR_PASSWORD
+```
+```shell
+export TF_VAR_location=YOUR_LOCATION
+```
 
 
 Navigate to the terraform directory to deploy the F5 VE

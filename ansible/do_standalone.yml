@@ -1,0 +1,43 @@
+---
+- name: Deploying DO
+  hosts: bigip
+  connection: local
+  gather_facts: false
+
+  tasks:
+  - name: PUSH DO
+    uri:
+      url: "https://{{ inventory_hostname }}/mgmt/shared/declarative-onboarding"
+      method: POST
+      body: "{{ lookup('file', 'templates/do.json') }}"
+      status_code: 202
+      timeout: 500
+      body_format: json
+      force_basic_auth: yes
+      user: "{{ f5_user }}"
+      password: "{{ f5_pass }}"
+      validate_certs: no
+    delegate_to: localhost
+    register: task_id
+
+  - name: Wait unit DO is finished.
+    uri:
+      url: "https://{{ inventory_hostname }}/mgmt/shared/declarative-onboarding/task/{{ task_id.json.id }}"
+      method: GET
+      timeout: 30
+      body_format: json
+      force_basic_auth: yes
+      user: "{{ f5_user }}"
+      password: "{{ f5_pass }}"
+      validate_certs: no
+    delegate_to: localhost
+    register: do_task_response
+    changed_when: do_task_response.status == 200  
+    retries: 120
+    until: do_task_response.json.result.status in ['ERROR', 'FAILED', 'OK'] or do_task_response.status == 200
+    delay: 3
+
+  - name: DO Provisioning failed
+    fail:
+      msg: "DoS Protection service de-activation failed with: {{ do_task_response.json.result.errors }}"
+    when: do_task_response.status != 200 

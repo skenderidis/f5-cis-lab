@@ -22,45 +22,22 @@ With the use of Terraform we will deploy the following infrastructure in Azure (
 * K8s VPC
 * 3x Ubuntu 18.04.2 (1xMaster and 2xNodes)
 
-[![Network Diagram](https://github.com/skenderidis/f5-cis-lab/blob/main/images/cis-lab-1.png?raw=true)]()
-
-In the second demo the clients will be connecting through another VPC and BIGIP will NOT change the source IP address. To achieve symmetric traffic between F5 and EKS, we have configured a route on the EKS subnet to send the client's VPC traffic through the BIGIP devices.<br>
-With the use of a Terraform script we will deploy the following infrastructure in AWS:
-* Main VPC with 6 subnets
-* Client VPC with 1 subnet
-* EKS with 2 nodes
-* 2xBIGIP devices in HA configuration (PAYG License)
-* Test PC on client VPC  *********  Not Yet Implemented    *************
-* Routes, ENIs, EIPs, Security Groups, IGW, NAT Gateways, etc
-* Initial configuration of F5 devices with DO and CFE 
-
-[![Network Diagram](https://github.com/skenderidis/f5-eks-demo/blob/main/images/F5-EKS-demo2.png?raw=true)]()
-
-> In both demos CFE and DO will be deployed with `run-time init` during the terraform deployment of the F5 devices.
-
-Some of the ingress services that will be deployed during this demo are:
-* Virtual Server CRDs (Layer 7) to publish an web appplication that runs on EKS
-* Transport Server CRDs (Layer 4) to publish a TCP appplication that runs on EKS
-* Transport Server CRDs (Layer 4) to publish a UDP appplication that runs on EKS
-* ConfigMap tp publish a STCP appplication that runs on EKS.
-
-The full list of ingress serfvices can be found on the directory Demo-*/kube/ingress.
-
+[![Network Diagram](https://raw.githubusercontent.com/skenderidis/f5-cis-lab/main/images/cis-lab-1.png)]()
 
 ## Pre-requisistes
 
 - Terraform installed
-- AWS credentials for programmatic access
-- For the demo we are using a PAYG License of BIGIP 200 Best Bundle. In order for Terraform to able to deploy this instance you would need to "Accept Terms" on the AWS Marketplace. 
-Go to "AWS Marketplace subscriptions" page and select “Discover products” from the left column. Then type “BIGIP 200Mbps Best” in the search box. Select the BIGIP 200Mbps => “Continue to Subscribe” => “Accept Terms”
-> This might take some time to be approved
+- Ansible installed
+- Programmatic Access for Azure 
+
+> will update the instructions on Programmatic access on Azure
 
 
 ## Installation
 
-Use git pull to make a local copy of the Terraform code.
+Use git pull to make a local copy of the github repo.
 ```shell
-git clone https://github.com/dudesweet/f5_terraform.git
+git clone https://github.com/skenderidis/f5-cis-lab.git
 ```
 
 Navigate to directory "Demo-1" or "Demo-2" depending on your requirements. For this example we will navigate to Demo-1 directory

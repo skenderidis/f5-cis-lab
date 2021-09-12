@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Filename: deploy.sh
 
-cd terraform/azure/f5_standalone
+cd tf/azure/f5_standalone
 terraform init
 terraform apply --auto-approve
 

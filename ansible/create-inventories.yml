@@ -2,8 +2,8 @@
 - hosts: localhost
   gather_facts: no
   vars_files:
-    - ../terraform/azure/f5.json
-    - ../terraform/azure/k8s.json
+    - ../f5.json
+    - ../k8s.json
   tasks:
    
   - name: Generate k8s-inventory

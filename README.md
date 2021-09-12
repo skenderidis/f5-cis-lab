@@ -9,19 +9,22 @@ Create a Lab environment to test CIS use-cases
 - [Introduction](#introduction)
 - [Pre-requisites](#pre-requisites)
 - [Installation](#installation)
+- [Use-cases](#use-cases)
 - [Variables](#variables)
 
 
 ## Introduction
 
-The purpose of this repository is to create a Lab environment on Azure that we will be able to demo CIS use cases.<br>
+The purpose of this repository is to create a Lab environment on Azure that we will be able to demo CIS use cases [Use-cases](#use-cases).<br>
+The use-cases that we will demonstratre
+
 We will use Terraform to perform the following:
 * F5 VPC
 * 1xBIGIP (25Mbps PAYG - Best)
 * K8s VPC
 * 3x Ubuntu 18.04.2 (1xMaster and 2xNodes)
 * VPC Peering, Security Groups, Public IPs, etc.
-* Ansible Dynamic invetories
+* Ansible Dynamic inventories
 
 <img src="https://raw.githubusercontent.com/skenderidis/f5-cis-lab/main/images/cis-lab-1.png">
 
@@ -134,6 +137,11 @@ ansible-playbook deploy-nginx-cis.yml -i k8s-inventory.ini
 ######################################################################################### 
 
 ```
+
+
+### Use-cases
+
+testes
 
 
 ### Variables

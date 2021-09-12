@@ -1,29 +1,32 @@
-ç---
+---
 - hosts: master
   gather_facts: no
-  tasks:
+  tasks:    
   - name: Download Git Repository
     git:
-      repo: https://github.com/skenderidis/f5-kubernetes
-      dest: /home/{{ansible_user}}/f5-kubernetes
+      repo: https://github.com/skenderidis/f5-cis-lab
+      dest: /home/{{ansible_user}}/f5-cis-lab
 
+  - name: Move kubernetes to different directory
+    command: mv /home/{{ansible_user}}/f5-cis-lab/kubernetes /home/{{ansible_user}}/kubernetes
+
+  - name: Remove Git
+    file: path=/home/{{ansible_user}}/f5-cis-lab state=absent
 
   - name: Deploy Apps and Services
-    command: kubectl apply -f f5-kubernetes/Demo-1/1-apps
+    command: kubectl apply -f kubernetes/1-apps
 
   - name: Deploy Nginx RBAC
-    command: kubectl apply -f f5-kubernetes/Demo-1/2-Nginx-RBAC
+    command: kubectl apply -f kubernetes/2-Nginx-RBAC
 
   - name: Deploy NGINX Resources
-    command: kubectl apply -f f5-kubernetes/Demo-1/3-Nginx-Resources
+    command: kubectl apply -f kubernetes/3-Nginx-Resources
 
   - name: Deploy NGINX CRDs
-    command: kubectl apply -f f5-kubernetes/Demo-1/4-Nginx-CRDs
+    command: kubectl apply -f kubernetes/4-Nginx-CRDs
 
   - name: Deploy NGINX Controller
-    command: kubectl apply -f f5-kubernetes/Demo-1/5-Nginx-Deployments
+    command: kubectl apply -f kubernetes/5-Nginx-Deployments
 
-  - name: Deploy CIS Resources (CRD mode)
-    command: kubectl apply -f f5-kubernetes/Demo-1/6-cis
-
- 
+#  - name: Deploy CIS Resources (CRD mode)
+#    command: kubectl apply -f kubernetes/6-cis

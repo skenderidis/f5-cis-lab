@@ -42,13 +42,13 @@ git clone https://github.com/skenderidis/f5-cis-lab.git
 In order for the terraform scripts to work it will require the following variables. 
 
 
-| Variables          | Default |	Terraform 0.13  |	Terraform 0.12  | Terraform 0.11  |
+| Variables          | Default  |
 |--------------------|---------------|-----------------|-----------------|-----------------|
 | subscription_id	   |           |
 | client_id	         |      |
-| client_secret      | 	 sadfasd |
-| tenant_id          |   asd  | 
-| username	         |   asd       |
+| client_secret      | 	 sadfasdsadfasdsadfasdsadfasdsadfasdsadfasdsadfasdsadfasd |
+| tenant_id          |   assadfasdsadfasdsadfasdsadfasdsadfasdsadfasdsadfasdsadfasdd  | 
+| username	         |   assadfasdsadfasdsadfasdsadfasdsadfasdsadfasdd       |
 | password	         |    asd      |
 | location	         |    asd  |
 | rg_prefix	         |     asd   |

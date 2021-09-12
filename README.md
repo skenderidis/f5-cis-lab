@@ -15,7 +15,7 @@ Create a Lab environment to test CIS use-cases
 
 ## Introduction
 
-The purpose of this repository is to create a Lab environment on Azure that we will be able to demo CIS use cases [Use-cases](#use-cases).<br>
+The purpose of this repository is to create a Lab environment on Azure that we will be able to demo [CIS use-cases](#use-cases).<br>
 The use-cases that we will demonstratre
 
 We will use Terraform to perform the following:
@@ -141,7 +141,18 @@ ansible-playbook deploy-nginx-cis.yml -i k8s-inventory.ini
 
 ### Use-cases
 
-testes
+The CRD use cases that we will demonstrate on this Lab are the following:
+1) Publish two HTTP applications with CRD Virtual Server 
+2) Publish two HTTPS applications with CRD Virtual Server and TLSProfile
+3) Publish and protect with WAF one HTTP Application 
+4) Publish and protect with L7 DDOS one HTTP Application 
+5) Publish and protect with APM one HTTP Application
+6) Publish and protect with AFM one HTTP Application
+7) Publish one HTTP Application and configure High Speed Logging for HTTP logs 
+8) Publish one HTTP Application and configure Caching/Compression/OneConnect
+
+The CRD with IPAM that we will demonstrate on this Lab are the following:
+1) Publish three HTTP applications with CRD Virtual Server & IPAM Controller 
 
 
 ### Variables

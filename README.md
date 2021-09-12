@@ -1,13 +1,11 @@
 
-# F5 CIS with EKS. (Work in progress)
+# F5 CIS Lab . (Work in progress)
 
-Providing Ingress Services for EKS with F5 CIS (in HA configuration) 
+Create a Lab environment to test CIS use-cases
 
 
 
 ## Table of Contents
-
-
 
 - [Introduction](#introduction)
 - [Pre-requisites](#pre-requisites)
@@ -17,16 +15,14 @@ Providing Ingress Services for EKS with F5 CIS (in HA configuration)
 
 ## Introduction
 
-This repository is split into two demos that show different use cases on how CIS can be used to publish ingress services for EKS.<br>
-In first demo the clients will be connecting through the internet to the public IPs that are created on the BIGIP and BIGIP will SNAT the client IP when it sends the connection back to EKS.<br>
-With the use of a Terraform script we will deploy the following infrastructure in AWS:
-* Main VPC with 6 subnets
-* EKS with 2 nodes
-* 2xBIGIP devices in HA configuration (PAYG License)
-* Routes, ENIs, EIPs, Security Groups, IGW, NAT Gateways, etc
-* Initial configuration of F5 devices with DO and CFE 
+The purpose of this repository is to create a Lab environment in Azure or AWS that we will be able to demo CIS use cases.<br>
+With the use of Terraform we will deploy the following infrastructure in Azure (or AWS):
+* F5 VPC
+* 1xBIGIP (25Mbps PAYG - Best)
+* K8s VPC
+* 3x Ubuntu 18.04.2 (1xMaster and 2xNodes)
 
-[![Network Diagram](https://github.com/skenderidis/f5-eks-demo/blob/main/images/F5-EKS-demo1.png?raw=true)]()
+[![Network Diagram](https://github.com/skenderidis/f5-cis-lab/blob/main/images/cis-lab-1.png?raw=true)]()
 
 In the second demo the clients will be connecting through another VPC and BIGIP will NOT change the source IP address. To achieve symmetric traffic between F5 and EKS, we have configured a route on the EKS subnet to send the client's VPC traffic through the BIGIP devices.<br>
 With the use of a Terraform script we will deploy the following infrastructure in AWS:

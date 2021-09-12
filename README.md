@@ -44,12 +44,12 @@ In order for the terraform scripts to work it will require the following variabl
 
 | Variables          | Default  |
 |--------------------|-------------------------------|
-| subscription_id	   |           |
-| client_id	         |      |
-| client_secret      | 	 sadfasdsadfasdsadfasdsadfasdsadfasdsadfasdsadfasdsadfasd |
-| tenant_id          |   assadfasdsadfasdsadfasdsadfasdsadfasdsadfasdsadfasdsadfasdd  | 
-| username	         |   assadfasdsadfasdsadfasdsadfasdsadfasdsadfasdd       |
-| password	         |    asd      |
+| subscription_id	   |  The subscription ID for Azure Authentication  |
+| client_id	         |  The client ID for Azure Authentication    |
+| client_secret      | 	The client secret for Azure Authentication |
+| tenant_id          |  The Tenant ID for Azure Authentication  | 
+| username	         |  The username that will be used for F5 devices. Note: Do not use "admin"      |
+| password	         |  The password that will be used for F5 devices. Note: avoid using special characters like '"^{}\/?><'       |
 | location	         |    asd  |
 | rg_prefix	         |     asd   |
 

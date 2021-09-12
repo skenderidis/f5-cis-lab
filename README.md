@@ -31,6 +31,7 @@ With the use of Terraform we will deploy the following infrastructure in Azure (
 - Programmatic Access for Azure 
 
 > will update the instructions on Programmatic access on Azure
+<img src="https://raw.githubusercontent.com/skenderidis/f5-cis-lab/main/images/cis-lab-1.png">
 
 
 ## Installation
@@ -40,9 +41,9 @@ Use git pull to make a local copy of the github repo.
 git clone https://github.com/skenderidis/f5-cis-lab.git
 ```
 
-Navigate to directory "Demo-1" or "Demo-2" depending on your requirements. For this example we will navigate to Demo-1 directory
+Navigate to the F5 standalone directory
 ```shell
-cd f5-eks-demo/Demo-1
+cd f5-cis-lab/tf
 ```
 Run the following command to initialize Terraform
 ```shell

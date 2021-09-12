@@ -43,7 +43,7 @@ In order for the terraform scripts to work it will require the following variabl
 
 
 | Variables          | Default  |
-|--------------------|---------------|-----------------|-----------------|-----------------|
+|--------------------|-------------------------------|
 | subscription_id	   |           |
 | client_id	         |      |
 | client_secret      | 	 sadfasdsadfasdsadfasdsadfasdsadfasdsadfasdsadfasdsadfasd |

@@ -83,7 +83,7 @@ export TF_VAR_location=YOUR_LOCATION
 export TF_VAR_rg_prefix=YOUR_LOCATION
 ```
 
-Fill in the right information on all variables and then paste them on the terminal 
+Fill in the right information for all variables and then paste them on the terminal 
 
 
 Once the Environment variables have been set run the `deploy.sh` script to create and configure the entire environment with Terraform and Ansible.

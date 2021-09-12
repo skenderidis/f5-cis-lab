@@ -1,0 +1,27 @@
+ apiVersion: "cis.f5.com/v1"
+ kind: VirtualServer
+ metadata:
+   name: application-portal
+   namespace: nginx-ingress
+   labels:
+     f5cr: "true"
+ spec:
+   virtualServerAddress: "10.1.10.10"
+   virtualServerName: "test2-virtual-server"
+   iRules:
+     - /Common/rule-test
+   pools:
+   - path: /
+     service: nginx-ingress
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10
+   serviceAddress:
+   - icmpEcho: "enable"
+     arpEnabled: true
+     routeAdvertisement: "all"
+     spanningEnabled: false

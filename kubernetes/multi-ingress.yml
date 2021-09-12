@@ -1,0 +1,47 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: multi-nginx-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app2.f5demo.cloud
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-svc-2
+            port:
+              number: 80
+  - host: app3.f5demo.cloud
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-svc-3
+            port:
+              number: 80
+  - host: app4.f5demo.cloud
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-svc-4
+            port:
+              number: 80
+  - host: app5.f5demo.cloud
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-svc-5
+            port:
+              number: 80

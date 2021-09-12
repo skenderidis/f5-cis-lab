@@ -16,6 +16,13 @@ terraform init
 terraform apply --auto-approve
 
 
+cd ../../ansible
+ansible-playbook create-inventories.yml
+ansible-playbook setup-k8s.yml -i k8s-inventory.ini
+ansible-playbook setup-flannel.yml -i k8s-inventory.ini
+ansible-playbook deploy-nginx-cis.yml -i k8s-inventory.ini
+
+
 ######################################################################################### 
 ###                 Only if you have the DNS zone deployed in Azure.                  ###
 ###     You will need to define the Resource Group and Zone name on the variables.tf  ###

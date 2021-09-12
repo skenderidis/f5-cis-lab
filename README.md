@@ -56,47 +56,64 @@ In order for the terraform scripts to work it will require the following variabl
 It is recommended to use Environment variables to set the above TF variables. 
 ```shell
 export TF_VAR_subscription_id=YOUR_SUBSCRIPTION_ID
-```
-```shell
 export TF_VAR_client_id=YOUR_CLIENT_ID
-```
-```shell
 export TF_VAR_client_secret=YOUR_CLIENT_SECRET
-```
-```shell
 export TF_VAR_tenant_id=YOUR_TENANT_ID
-```
-```shell
 export TF_VAR_username=YOUR_USERNAME
-```
-```shell
 export TF_VAR_password=YOUR_PASSWORD
-```
-```shell
 export TF_VAR_location=YOUR_LOCATION
+export TF_VAR_rg_prefix=YOUR_LOCATION
 ```
 
 
-Navigate to the terraform directory to deploy the F5 VE
+Once the Environment variables have been set navigate to f5-cis-lab directory where you will find the `deploy.sh`  bash script. Run the command `./deploy.sh` to create the entire environment Terraform.
 ```shell
-cd f5-cis-lab/tf/azure/f5_standalone
+cd f5-cis-lab/
+./deploy.sh
 ```
-Run the following command to initialize andTerraform
+
+
+The Bash script is shown below
+
 ```shell
+#!/usr/bin/env bash
+# Filename: deploy.sh
+
+cd tf/azure/f5_standalone
 terraform init
-terraform apply --auto-approve 
+terraform apply --auto-approve
+
+cd ../k8s
+terraform init
+terraform apply --auto-approve
+
+cd ../peering/
+terraform init
+terraform apply --auto-approve
+
+cd ../../ansible
+ansible-playbook create-inventories.yml
+ansible-playbook setup-k8s.yml -i k8s-inventory.ini
+ansible-playbook setup-flannel.yml -i k8s-inventory.ini
+ansible-playbook deploy-nginx-cis.yml -i k8s-inventory.ini
+
+######################################################################################### 
+###                 Only if you have the DNS zone deployed in Azure.                  ###
+###     You will need to define the Resource Group and Zone name on the variables.tf  ###
+######################################################################################### 
+#cd terraform/azure/dns/k8s
+#terraform init
+#terraform apply --auto-approve
+
+#cd terraform/azure/dns/f5-standalone
+#terraform init
+#terraform apply --auto-approve
+######################################################################################### 
+
+
+
 ```
 
-Run the command `terraform plan` to see the changes that are going to be made.
-```shell
-terraform plan 
-```
-
-To build the Lab infrastructure run the command `terraform apply`.
-```shell
-terraform apply
-```
-> "terraform apply" will prompt you with a yes/no to confirm if you want to go ahead and make the changes.
 
 
 

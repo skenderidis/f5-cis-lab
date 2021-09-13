@@ -1,7 +1,7 @@
 
-# F5 CIS Azure Lab . (Work in progress)
+# F5 CIS Azure Lab (Work in progress)
 
-Create a Lab environment to test CIS use-cases
+Create a Lab environment in Azure to test several CIS use-cases
 
 
 ## Table of Contents
@@ -16,9 +16,8 @@ Create a Lab environment to test CIS use-cases
 ## Introduction
 
 The purpose of this repository is to create a Lab environment on Azure that we will be able to demo [CIS use-cases](#use-cases).<br>
-The use-cases that we will demonstratre
 
-We will use Terraform to perform the following:
+We will use Terraform to create the following:
 * F5 VPC
 * 1xBIGIP (25Mbps PAYG - Best)
 * K8s VPC
@@ -28,7 +27,7 @@ We will use Terraform to perform the following:
 
 <img src="https://raw.githubusercontent.com/skenderidis/f5-cis-lab/main/images/cis-lab-1.png">
 
-We will use Ansible to perform the following:
+We will use Ansible to configure the following:
 * Provision the F5 appliance with Declerative Onboarding.
 * Configure Kubernetes on the 3 ubuntu VMs
 * Configure Flannel between BIGIP and Ubuntu Nodes/Master
@@ -41,11 +40,11 @@ We will use Ansible to perform the following:
 - Ansible installed
 - Programmatic Access for Azure 
 
-> (to-do) will update the instructions on Programmatic access on Azure
+> (to-do) **** Need to update the instructions on Programmatic access for Azure ****
 
 ## Installation
 
-Use git pull to make a local copy of the github repo.
+Use git to make a local copy of the github repo.
 ```shell
 git clone https://github.com/skenderidis/f5-cis-lab.git
 ```
@@ -64,7 +63,7 @@ In order for the terraform scripts to work it will require the following variabl
 | rg_prefix	         |  The prefix for resource groups that will be created   |
 
 
-It is recommended to use Environment variables to set the above TF variables. Navigate to `f5-cis-lab` directory and edit the `export_vars` file.
+There are multiple ways of inputing the above TF variables, but it is recommended to use Environment variables. Navigate to `f5-cis-lab` directory and open the `export_vars` file.
 
 ```shell
 cd f5-cis-lab/
@@ -83,7 +82,7 @@ export TF_VAR_location=YOUR_LOCATION
 export TF_VAR_rg_prefix=YOUR_LOCATION
 ```
 
-Fill in the right information for all variables and then paste them on the terminal 
+Fill in the right information for the variables and then paste them on the terminal 
 
 
 Once the Environment variables have been set run the `deploy.sh` script to create and configure the entire environment with Terraform and Ansible.
@@ -137,6 +136,7 @@ ansible-playbook deploy-nginx-cis.yml -i k8s-inventory.ini
 Throughout this demo we will try to demo as many use cases as possible with the use of CRDs/ConfigMaps/Ingress
 
 The CRD use cases:
+<a href="https://raw.githubusercontent.com/skenderidis/f5-cis-lab/main/images/cis-lab-1.png">testxt </a>
 1) Publish two HTTP applications with CRD Virtual Server 
 2) Publish two HTTPS applications with CRD Virtual Server and TLSProfile
 3) Publish and protect with WAF one HTTP Application 

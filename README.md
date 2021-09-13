@@ -133,12 +133,11 @@ ansible-playbook deploy-nginx-cis.yml -i k8s-inventory.ini
 
 
 ### Use-cases
-Throughout this demo we will try to demo as many use cases as possible with the use of CRDs/ConfigMaps/Ingress
+Throughout this demo we will try to demo as many use cases as possible with the use of CRDs, ConfigMaps and Ingress.
+CRD use cases:
 
-The CRD use cases:
-<a href="https://raw.githubusercontent.com/skenderidis/f5-cis-lab/main/images/cis-lab-1.png">testxt </a>
-1) Publish two HTTP applications with CRD Virtual Server 
-2) Publish two HTTPS applications with CRD Virtual Server and TLSProfile
+1) Publish two HTTP applications with CRD Virtual Server <a href="https://github.com/skenderidis/f5-cis-lab/tree/main/usecases/crd/http">more info </a>
+2) Publish two HTTPS applications with CRD Virtual Server and TLSProfile <a href="https://github.com/skenderidis/f5-cis-lab/tree/main/usecases/crd/ssl">more info </a>
 3) Publish and protect with WAF one HTTP Application 
 4) Publish and protect with L7 DDOS one HTTP Application 
 5) Publish and protect with APM one HTTP Application
@@ -156,5 +155,5 @@ The NGINX-CIS use cases:
 2) Publish 5 applications with NGINX Ingress Controller and use CIS to publish NGINX with Layer 7 CRD and different WAF policy per application
 3) Publish 5 applications with NGINX Ingress Controller and use CIS to publish NGINX with Layer 7 CRD and protected with AFM
 
-
+ConfigMap and Ingress use cases:
 

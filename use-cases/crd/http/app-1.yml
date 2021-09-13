@@ -1,14 +1,13 @@
  apiVersion: "cis.f5.com/v1"
  kind: VirtualServer
  metadata:
-   name: app2-ssl
+   name: App-1
    labels:
      f5cr: "true"
  spec:
-   host: app2.f5demo.cloud
-   tlsProfileName: app1-tls
+   host: app1.f5demo.cloud
    virtualServerAddress: "10.1.10.10"
-   virtualServerName: "app2-ssl"
+   virtualServerName: "App-1"
    pools:
    - path: /
      service: svc-app1
@@ -18,4 +17,13 @@
        send: "GET /rn"
        recv: ""
        interval: 10
-       timeout: 10     
+       timeout: 10
+   - path: /pay
+     service: svc-app2
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10

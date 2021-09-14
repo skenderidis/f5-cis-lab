@@ -98,7 +98,7 @@ The `deploy.sh` script is shown below
 #!/usr/bin/env bash
 # Filename: deploy.sh
 
-cd tf/azure/f5_standalone
+cd tf/f5_standalone
 terraform init
 terraform apply --auto-approve
 
@@ -112,6 +112,7 @@ terraform apply --auto-approve
 
 cd ../../ansible
 ansible-playbook create-inventories.yml
+ansible-playbook do-standalone.yml -i k8s-inventory.ini
 ansible-playbook setup-k8s.yml -i k8s-inventory.ini
 ansible-playbook setup-flannel.yml -i k8s-inventory.ini
 ansible-playbook deploy-nginx-cis.yml -i k8s-inventory.ini

@@ -1,0 +1,8 @@
+export TF_VAR_subscription_id=*****
+export TF_VAR_client_id=*****
+export TF_VAR_client_secret=*****
+export TF_VAR_tenant_id=*****
+export TF_VAR_username=*****
+export TF_VAR_password=*****
+export TF_VAR_location=eastus
+export TF_VAR_rg_prefix=demo

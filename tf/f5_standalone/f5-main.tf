@@ -176,7 +176,6 @@ resource "azurerm_public_ip" "pip_app3" {
 
 
 
-
 module "azure_f5" {
   source            = "./modules/f5 bigip"
   azure_region      = var.location

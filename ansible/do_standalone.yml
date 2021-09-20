@@ -9,7 +9,7 @@
     uri:
       url: "https://{{ inventory_hostname }}/mgmt/shared/declarative-onboarding"
       method: POST
-      body: "{{ lookup('file', 'templates/do.json') }}"
+      body: "{{ lookup('file', 'templates/do-standalone.json') }}"
       status_code: 202
       timeout: 500
       body_format: json

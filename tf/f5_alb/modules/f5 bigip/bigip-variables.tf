@@ -41,6 +41,3 @@ variable "self_ip_int" { }
 variable "add_ip_ext_1" { }
 variable "add_ip_ext_2" { }
 variable "add_ip_ext_3" { }
-variable "pip_ext_1_id" { }
-variable "pip_ext_2_id" { }
-variable "pip_ext_3_id" { }

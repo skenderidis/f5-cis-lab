@@ -221,24 +221,24 @@ module "azure_f5_ha2" {
 resource "azurerm_public_ip" "lb_pip_app1" {
   name                = "PublicIPForApp1"
   location            = var.location
-  sku				  = "Standard"
-  resource_group_name = azurerm_resource_group.rg.name 
+  sku				          = "Standard"
+  resource_group_name = azurerm_resource_group.f5_rg.name 
   allocation_method   = "Static"
 }
 
 resource "azurerm_public_ip" "lb_pip_app2" {
   name                = "PublicIPForApp2"
   location            = var.location
-  sku				  = "Standard"
-  resource_group_name = azurerm_resource_group.rg.name 
+  sku				          = "Standard"
+  resource_group_name = azurerm_resource_group.f5_rg.name 
   allocation_method   = "Static"
 }
 
 resource "azurerm_public_ip" "lb_pip_app3" {
   name                = "PublicIPForApp3"
   location            = var.location
-  sku				  = "Standard"
-  resource_group_name = azurerm_resource_group.rg.name 
+  sku				          = "Standard"
+  resource_group_name = azurerm_resource_group.f5_rg.name 
   allocation_method   = "Static"
 }
 
@@ -247,7 +247,7 @@ resource "azurerm_lb" "f5_ha_lb" {
   name                = "F5_HA_LB"
   location            = var.location
   sku				  = "Standard"
-  resource_group_name = azurerm_resource_group.rg.name 
+  resource_group_name = azurerm_resource_group.f5_rg.name 
 
   frontend_ip_configuration {
     name                 = "App1"
@@ -265,7 +265,7 @@ resource "azurerm_lb" "f5_ha_lb" {
 }
 
 resource "azurerm_lb_probe" "tcp_80" {
-  resource_group_name = azurerm_resource_group.rg.name 
+  resource_group_name = azurerm_resource_group.f5_rg.name 
   loadbalancer_id     = azurerm_lb.f5_ha_lb.id
   name                = "TCP-80"
   port                = 80
@@ -273,19 +273,16 @@ resource "azurerm_lb_probe" "tcp_80" {
 
 
 resource "azurerm_lb_backend_address_pool" "pool_app1" {
-  resource_group_name = azurerm_resource_group.rg.name
   loadbalancer_id     = azurerm_lb.f5_ha_lb.id
   name                = "Pool_App1"
 }
 
 resource "azurerm_lb_backend_address_pool" "pool_app2" {
-  resource_group_name = azurerm_resource_group.rg.name
   loadbalancer_id     = azurerm_lb.f5_ha_lb.id
   name                = "Pool_App2"
 }
 
 resource "azurerm_lb_backend_address_pool" "pool_app3" {
-  resource_group_name = azurerm_resource_group.rg.name
   loadbalancer_id     = azurerm_lb.f5_ha_lb.id
   name                = "Pool_App3"
 }
@@ -365,3 +362,44 @@ resource "azurerm_lb_rule" "App3_80" {
 }
 
 
+resource "null_resource" "create-file-for-peering" {
+  provisioner "local-exec" {
+    command = "echo '{\"rg_name\":\"${azurerm_resource_group.f5_rg.name}\", \"vnet_name\":\"${azurerm_virtual_network.f5_vnet.name}\"}' > ../../f5_info.json"
+}
+  provisioner "local-exec" {
+    when    = destroy
+    command = "rm ../../f5_info.json"
+    on_failure = continue
+}
+}
+
+resource "null_resource" "create-f5json" {
+  provisioner "local-exec" {
+    command = "echo '{\"bigip_01_mgmt\":\"${module.azure_f5_ha1.mgmt_public_ip}\", \"bigip_02_mgmt\":\"${module.azure_f5_ha2.mgmt_public_ip}\", \"app1_ip\":\"${azurerm_public_ip.lb_pip_app1.ip_address}\", \"app2_ip\":\"${azurerm_public_ip.lb_pip_app2.ip_address}\", \"app3_ip\":\"${azurerm_public_ip.lb_pip_app3.ip_address}\", \"f5_user\":\"${var.username}\", \"f5_pass\":\"${var.password}\"}' > ../../f5.json"
+}
+  provisioner "local-exec" {
+    when    = destroy
+    command = "rm ../../f5.json"
+    on_failure = continue
+}
+
+}
+
+
+
+output "BIGIP01-Mgmt_Public_IP" {
+  value = module.azure_f5_ha1.mgmt_public_ip
+}
+output "BIGIP02-Mgmt_Public_IP" {
+  value = module.azure_f5_ha2.mgmt_public_ip
+}
+
+output "App1_Public_IP" {
+  value = azurerm_public_ip.lb_pip_app1.ip_address
+}
+output "App2_Public_IP" {
+  value = azurerm_public_ip.lb_pip_app2.ip_address
+}
+output "App3_Public_IP" {
+  value = azurerm_public_ip.lb_pip_app3.ip_address
+}

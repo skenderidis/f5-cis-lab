@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  gather_facts: no
+  vars_files:
+    - ../f5.json
+    - ../k8s.json
+  tasks:
+   
+  - name: Generate k8s-inventory
+    template:
+      src=templates/k8s-inventory-ha.j2
+      dest=k8s-inventory.ini
+
+  #- name: Generate f5-inventory
+  #  template:
+  #    src=templates/f5-inventory.j2
+  #    dest=f5-inventory.ini
+
+

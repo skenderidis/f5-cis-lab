@@ -36,7 +36,18 @@ variable add_ip_ext_01_1  		{default = "10.1.10.10"}
 variable add_ip_ext_01_2  		{default = "10.1.10.20"}
 variable add_ip_ext_01_3  		{default = "10.1.10.30"}
 variable self_ip_int_01  		{default = "10.1.20.4"}
-variable prefix_bigip  			{default = "bigip1"}
+
+
+variable self_ip_mgmt_02  		{default = "10.1.1.5"}
+variable self_ip_ext_02 		{default = "10.1.10.5"}
+variable add_ip_ext_02_1  		{default = "10.1.10.11"}
+variable add_ip_ext_02_2  		{default = "10.1.10.21"}
+variable add_ip_ext_02_3  		{default = "10.1.10.31"}
+variable self_ip_int_02  		{default = "10.1.20.5"}
+
+
+
+variable prefix_bigip  			{default = "bigip"}
 
 variable allowedIPs				{default = ["0.0.0.0/0"]}
 

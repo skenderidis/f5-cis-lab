@@ -142,7 +142,6 @@ CRD use cases:
 3) Publish and protect with WAF one HTTP Application 
 4) Publish and protect with L7 DDOS one HTTP Application 
 5) Publish one HTTP Application and configure High Speed Logging for HTTP logs 
-6) Publish one HTTP Application and configure Caching/Compression/OneConnect
 
 The CRD/IPAM use cases:
 1) Publish three HTTP applications with CRD Virtual Server & IPAM Controller 

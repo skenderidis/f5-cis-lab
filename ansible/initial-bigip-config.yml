@@ -1,0 +1,50 @@
+---
+
+- name: Configuring F5 with Initial Objects
+  hosts: bigip
+  connection: local
+  gather_facts: false
+  vars:
+    provider:
+      password: "{{ f5_pass}}"
+      server: "{{inventory_hostname}}"
+      user: "{{f5_user}}"
+      validate_certs: no
+      server_port: 443
+  vars:
+   irules: ['Allow-Src-IPs','Http-Header-Enrichment','SSL-Header-Enrichment']
+
+  tasks:
+  - name: ADD iRule Allow Src-IPs
+    bigip_irule:
+      provider: "{{provider}}"
+      module: "ltm"
+      name: "Allow-Src-IPs"
+      content: "{{lookup('file','templates/Allow-Src-IPs')}}"
+
+  - name: ADD iRule HTTP Header Enrichment
+    bigip_irule:
+      provider: "{{provider}}"
+      module: "ltm"
+      name: "Http-Header-Enrichment"
+      content: "{{lookup('file','templates/Http-Header-Enrichment')}}"
+
+  - name: ADD iRule SSL Header Enrichment
+    bigip_irule:
+      provider: "{{provider}}"
+      module: "ltm"
+      name: "Http-Header-Enrichment"
+      content: "{{lookup('file','templates/SSL-Header-Enrichment')}}"
+
+
+  - name: Import and activate ASM policy
+    bigip_asm_policy:
+      name: new_asm_policy
+      file: /root/asm_policy.xml
+      active: yes
+      state: present
+      provider:
+        server: lb.mydomain.com
+        user: admin
+        password: secret
+

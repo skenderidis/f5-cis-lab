@@ -23,8 +23,7 @@
         },
 		"myProvisioning": {
             "class": "Provision",
-            "ltm": "nominal",
-            "asm": "nominal"
+            "ltm": "nominal"
         },       	        		
         "external": {
             "class": "VLAN",

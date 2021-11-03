@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-bigip-ctlr-deployment
+  namespace: kube-system
+spec:
+# DO NOT INCREASE REPLICA COUNT
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-bigip-ctlr-deployment
+  template:
+    metadata:
+      labels:
+        app: k8s-bigip-ctlr-deployment
+    spec:
+      # Name of the Service Account bound to a Cluster Role with the required
+      # permissions
+      containers:
+        - name: k8s-bigip-ctlr
+          image: "f5networks/k8s-bigip-ctlr:2.5.1"
+#          image: "nitin24/k8s-bigip-ctlr:info-1.0"
+          env:
+            - name: BIGIP_USERNAME
+              valueFrom:
+                secretKeyRef:
+                # Replace with the name of the Secret containing your login
+                # credentials
+                  name: bigip-login
+                  key: username
+            - name: BIGIP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                # Replace with the name of the Secret containing your login
+                # credentials
+                  name: bigip-login
+                  key: password
+          command: ["/app/bin/k8s-bigip-ctlr"]
+          args: [
+            # See the k8s-bigip-ctlr documentation for information about
+            # all config options
+            # https://clouddocs.f5.com/containers/latest/
+            "--bigip-username=$(BIGIP_USERNAME)",
+            "--bigip-password=$(BIGIP_PASSWORD)",
+            "--bigip-url=10.1.20.4",
+            "--bigip-partition=cis2",
+            "--node-poll-interval=30",
+            "--verify-interval=30",
+            "--pool-member-type=cluster",
+            "--custom-resource-mode=true",
+            "--log-level=DEBUG",
+            "--flannel-name=/Common/fl-tunnel",
+            "--log-as3-response=true",
+            "--agent=as3",
+            "--ipam=true",
+#            "--ingress-link-mode=true",
+#            "--namespace=nodeport",
+#            "--share-nodes=true",
+            "--insecure"
+            # for secure communication provide the internal ca certificates using config-map with below option and remove insecure parameter
+            #"--trusted-certs-cfgmap=<namespace/configmap>",
+            ]
+      serviceAccount: bigip-ctlr
+      serviceAccountName: bigip-ctlr
+      imagePullSecrets:
+          # Secret that gives access to a private docker registry
+          #- name: f5-docker-images
+          # Secret containing the BIG-IP system login credentials
+          - name: bigip-login

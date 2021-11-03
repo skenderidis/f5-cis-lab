@@ -36,6 +36,12 @@
     template:
       src=templates/bigip-secret.j2
       dest=/home/{{ansible_user}}/kubernetes/6-cis/bigip-secret.yml
-      
-  - name: Deploy CIS Resources (CRD mode)
-    command: kubectl apply -f kubernetes/6-cis
+  
+  - name: Generate BIGIP-Secret YAML file (again)
+    become: true
+    template:
+      src=templates/bigip-secret.j2
+      dest=/home/{{ansible_user}}/kubernetes/7-cis-ipam/bigip-secret.yml
+            
+#  - name: Deploy CIS Resources (CRD mode)
+#    command: kubectl apply -f kubernetes/6-cis

@@ -11,9 +11,3 @@
       src=templates/k8s-inventory.j2
       dest=k8s-inventory.ini
 
-  #- name: Generate f5-inventory
-  #  template:
-  #    src=templates/f5-inventory.j2
-  #    dest=f5-inventory.ini
-
-

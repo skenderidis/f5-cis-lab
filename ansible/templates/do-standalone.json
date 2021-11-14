@@ -76,7 +76,7 @@
             "ui.advisory.color": "green",
             "ui.advisory.text": "DO Through Ansible",
             "restjavad.useextramb": true,
-            "provision.extramb": "500"
+            "provision.extramb": "2048"
         }
 	}
 }

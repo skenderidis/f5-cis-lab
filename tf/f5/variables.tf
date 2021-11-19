@@ -39,9 +39,9 @@ variable allowedIPs				{default = ["0.0.0.0/0"]}
 
 ##################   F5 Image related	 ##############
 
-variable f5_version 			{default = "15.1.201000"}
-variable f5_image_name 			{default = "f5-bigip-virtual-edition-25m-best-hourly" }
-variable f5_product_name 		{default = "f5-big-ip-best"}
+variable f5_version 			{default = "15.1.400000"}
+variable f5_image_name 			{default = "f5-bigip-virtual-edition-200m-good-hourly" }
+variable f5_product_name 		{default = "f5-big-ip-good"}
 variable f5_instance_type 		{default = "Standard_DS4_v2"}
 
 variable do_url 				{default = "https://github.com/F5Networks/f5-declarative-onboarding/releases/download/v1.25.0/f5-declarative-onboarding-1.25.0-7.noarch.rpm"}

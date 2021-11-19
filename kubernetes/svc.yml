@@ -1,0 +1,1170 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-0
+  labels:
+    app: app-svc-0
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-1
+  labels:
+    app: app-svc-1
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-2
+  labels:
+    app: app-svc-2
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-3
+  labels:
+    app: app-svc-3
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-4
+  labels:
+    app: app-svc-4
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-5
+  labels:
+    app: app-svc-5
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-6
+  labels:
+    app: app-svc-6
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-7
+  labels:
+    app: app-svc-7
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-8
+  labels:
+    app: app-svc-8
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-9
+  labels:
+    app: app-svc-9
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-10
+  labels:
+    app: app-svc-10
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-11
+  labels:
+    app: app-svc-11
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-12
+  labels:
+    app: app-svc-12
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-13
+  labels:
+    app: app-svc-13
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-14
+  labels:
+    app: app-svc-14
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-15
+  labels:
+    app: app-svc-15
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-16
+  labels:
+    app: app-svc-16
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-17
+  labels:
+    app: app-svc-17
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-18
+  labels:
+    app: app-svc-18
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-19
+  labels:
+    app: app-svc-19
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-20
+  labels:
+    app: app-svc-20
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-21
+  labels:
+    app: app-svc-21
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-22
+  labels:
+    app: app-svc-22
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-23
+  labels:
+    app: app-svc-23
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-24
+  labels:
+    app: app-svc-24
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-25
+  labels:
+    app: app-svc-25
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-26
+  labels:
+    app: app-svc-26
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-27
+  labels:
+    app: app-svc-27
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-28
+  labels:
+    app: app-svc-28
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-29
+  labels:
+    app: app-svc-29
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-30
+  labels:
+    app: app-svc-30
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-31
+  labels:
+    app: app-svc-31
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-32
+  labels:
+    app: app-svc-32
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-33
+  labels:
+    app: app-svc-33
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-34
+  labels:
+    app: app-svc-34
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-35
+  labels:
+    app: app-svc-35
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-36
+  labels:
+    app: app-svc-36
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-37
+  labels:
+    app: app-svc-37
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-38
+  labels:
+    app: app-svc-38
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-39
+  labels:
+    app: app-svc-39
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-40
+  labels:
+    app: app-svc-40
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-41
+  labels:
+    app: app-svc-41
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-42
+  labels:
+    app: app-svc-42
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-43
+  labels:
+    app: app-svc-43
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-44
+  labels:
+    app: app-svc-44
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-45
+  labels:
+    app: app-svc-45
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-46
+  labels:
+    app: app-svc-46
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-47
+  labels:
+    app: app-svc-47
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-48
+  labels:
+    app: app-svc-48
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-49
+  labels:
+    app: app-svc-49
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-50
+  labels:
+    app: app-svc-50
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-51
+  labels:
+    app: app-svc-51
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-52
+  labels:
+    app: app-svc-52
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-53
+  labels:
+    app: app-svc-53
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-54
+  labels:
+    app: app-svc-54
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-55
+  labels:
+    app: app-svc-55
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-56
+  labels:
+    app: app-svc-56
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-57
+  labels:
+    app: app-svc-57
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-58
+  labels:
+    app: app-svc-58
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-59
+  labels:
+    app: app-svc-59
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-60
+  labels:
+    app: app-svc-60
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-61
+  labels:
+    app: app-svc-61
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-62
+  labels:
+    app: app-svc-62
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-63
+  labels:
+    app: app-svc-63
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-64
+  labels:
+    app: app-svc-64
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-65
+  labels:
+    app: app-svc-65
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-66
+  labels:
+    app: app-svc-66
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-67
+  labels:
+    app: app-svc-67
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-68
+  labels:
+    app: app-svc-68
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-69
+  labels:
+    app: app-svc-69
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-70
+  labels:
+    app: app-svc-70
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-71
+  labels:
+    app: app-svc-71
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-72
+  labels:
+    app: app-svc-72
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-73
+  labels:
+    app: app-svc-73
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-74
+  labels:
+    app: app-svc-74
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-75
+  labels:
+    app: app-svc-75
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-76
+  labels:
+    app: app-svc-76
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-77
+  labels:
+    app: app-svc-77
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-78
+  labels:
+    app: app-svc-78
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-79
+  labels:
+    app: app-svc-79
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-80
+  labels:
+    app: app-svc-80
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-81
+  labels:
+    app: app-svc-81
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-82
+  labels:
+    app: app-svc-82
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-83
+  labels:
+    app: app-svc-83
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-84
+  labels:
+    app: app-svc-84
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-85
+  labels:
+    app: app-svc-85
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-86
+  labels:
+    app: app-svc-86
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-87
+  labels:
+    app: app-svc-87
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-88
+  labels:
+    app: app-svc-88
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-89
+  labels:
+    app: app-svc-89
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app-1

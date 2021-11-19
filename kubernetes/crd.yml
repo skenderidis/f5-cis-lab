@@ -1,0 +1,400 @@
+---
+ apiVersion: "cis.f5.com/v1"
+ kind: VirtualServer
+ metadata:
+   name: app0
+   labels:
+     f5cr: "true"
+ spec:
+   virtualServerAddress: "10.1.11.10"
+   virtualServerName: "app0"
+   pools:
+   - path: /
+     service: app-svc-0
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10
+---
+ apiVersion: "cis.f5.com/v1"
+ kind: VirtualServer
+ metadata:
+   name: app1
+   labels:
+     f5cr: "true"
+ spec:
+   virtualServerAddress: "10.1.11.11"
+   virtualServerName: "app1"
+   pools:
+   - path: /
+     service: app-svc-1
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10
+---
+ apiVersion: "cis.f5.com/v1"
+ kind: VirtualServer
+ metadata:
+   name: app2
+   labels:
+     f5cr: "true"
+ spec:
+   virtualServerAddress: "10.1.11.12"
+   virtualServerName: "app2"
+   pools:
+   - path: /
+     service: app-svc-2
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10
+---
+ apiVersion: "cis.f5.com/v1"
+ kind: VirtualServer
+ metadata:
+   name: app3
+   labels:
+     f5cr: "true"
+ spec:
+   virtualServerAddress: "10.1.11.13"
+   virtualServerName: "app3"
+   pools:
+   - path: /
+     service: app-svc-3
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10
+---
+ apiVersion: "cis.f5.com/v1"
+ kind: VirtualServer
+ metadata:
+   name: app4
+   labels:
+     f5cr: "true"
+ spec:
+   virtualServerAddress: "10.1.11.14"
+   virtualServerName: "app4"
+   pools:
+   - path: /
+     service: app-svc-4
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10
+---
+ apiVersion: "cis.f5.com/v1"
+ kind: VirtualServer
+ metadata:
+   name: app5
+   labels:
+     f5cr: "true"
+ spec:
+   virtualServerAddress: "10.1.11.15"
+   virtualServerName: "app5"
+   pools:
+   - path: /
+     service: app-svc-5
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10
+---
+ apiVersion: "cis.f5.com/v1"
+ kind: VirtualServer
+ metadata:
+   name: app6
+   labels:
+     f5cr: "true"
+ spec:
+   virtualServerAddress: "10.1.11.16"
+   virtualServerName: "app6"
+   pools:
+   - path: /
+     service: app-svc-6
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10
+---
+ apiVersion: "cis.f5.com/v1"
+ kind: VirtualServer
+ metadata:
+   name: app7
+   labels:
+     f5cr: "true"
+ spec:
+   virtualServerAddress: "10.1.11.17"
+   virtualServerName: "app7"
+   pools:
+   - path: /
+     service: app-svc-7
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10
+---
+ apiVersion: "cis.f5.com/v1"
+ kind: VirtualServer
+ metadata:
+   name: app8
+   labels:
+     f5cr: "true"
+ spec:
+   virtualServerAddress: "10.1.11.18"
+   virtualServerName: "app8"
+   pools:
+   - path: /
+     service: app-svc-8
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10
+---
+ apiVersion: "cis.f5.com/v1"
+ kind: VirtualServer
+ metadata:
+   name: app9
+   labels:
+     f5cr: "true"
+ spec:
+   virtualServerAddress: "10.1.11.19"
+   virtualServerName: "app9"
+   pools:
+   - path: /
+     service: app-svc-9
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10
+---
+ apiVersion: "cis.f5.com/v1"
+ kind: VirtualServer
+ metadata:
+   name: app10
+   labels:
+     f5cr: "true"
+ spec:
+   virtualServerAddress: "10.1.11.110"
+   virtualServerName: "app10"
+   pools:
+   - path: /
+     service: app-svc-10
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10
+---
+ apiVersion: "cis.f5.com/v1"
+ kind: VirtualServer
+ metadata:
+   name: app11
+   labels:
+     f5cr: "true"
+ spec:
+   virtualServerAddress: "10.1.11.111"
+   virtualServerName: "app11"
+   pools:
+   - path: /
+     service: app-svc-11
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10
+---
+ apiVersion: "cis.f5.com/v1"
+ kind: VirtualServer
+ metadata:
+   name: app12
+   labels:
+     f5cr: "true"
+ spec:
+   virtualServerAddress: "10.1.11.112"
+   virtualServerName: "app12"
+   pools:
+   - path: /
+     service: app-svc-12
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10
+---
+ apiVersion: "cis.f5.com/v1"
+ kind: VirtualServer
+ metadata:
+   name: app13
+   labels:
+     f5cr: "true"
+ spec:
+   virtualServerAddress: "10.1.11.113"
+   virtualServerName: "app13"
+   pools:
+   - path: /
+     service: app-svc-13
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10
+---
+ apiVersion: "cis.f5.com/v1"
+ kind: VirtualServer
+ metadata:
+   name: app14
+   labels:
+     f5cr: "true"
+ spec:
+   virtualServerAddress: "10.1.11.114"
+   virtualServerName: "app14"
+   pools:
+   - path: /
+     service: app-svc-14
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10
+---
+ apiVersion: "cis.f5.com/v1"
+ kind: VirtualServer
+ metadata:
+   name: app15
+   labels:
+     f5cr: "true"
+ spec:
+   virtualServerAddress: "10.1.11.115"
+   virtualServerName: "app15"
+   pools:
+   - path: /
+     service: app-svc-15
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10
+---
+ apiVersion: "cis.f5.com/v1"
+ kind: VirtualServer
+ metadata:
+   name: app16
+   labels:
+     f5cr: "true"
+ spec:
+   virtualServerAddress: "10.1.11.116"
+   virtualServerName: "app16"
+   pools:
+   - path: /
+     service: app-svc-16
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10
+---
+ apiVersion: "cis.f5.com/v1"
+ kind: VirtualServer
+ metadata:
+   name: app17
+   labels:
+     f5cr: "true"
+ spec:
+   virtualServerAddress: "10.1.11.117"
+   virtualServerName: "app17"
+   pools:
+   - path: /
+     service: app-svc-17
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10
+---
+ apiVersion: "cis.f5.com/v1"
+ kind: VirtualServer
+ metadata:
+   name: app18
+   labels:
+     f5cr: "true"
+ spec:
+   virtualServerAddress: "10.1.11.118"
+   virtualServerName: "app18"
+   pools:
+   - path: /
+     service: app-svc-18
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10
+---
+ apiVersion: "cis.f5.com/v1"
+ kind: VirtualServer
+ metadata:
+   name: app19
+   labels:
+     f5cr: "true"
+ spec:
+   virtualServerAddress: "10.1.11.119"
+   virtualServerName: "app19"
+   pools:
+   - path: /
+     service: app-svc-19
+     servicePort: 80
+     monitor:
+       type: http
+       send: "GET /rn"
+       recv: ""
+       interval: 10
+       timeout: 10

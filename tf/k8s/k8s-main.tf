@@ -138,11 +138,54 @@ module "node02" {
   vm-size	= var.k8s_vm-size
 }
 
+module "node03" {
+  source    = "./modules/ubuntu"
+  tag       = var.tag
+  prefix  	= var.k8s_prefix_node03
+  ip 	    = var.k8s_ip_node03
+  location  = var.location
+  subnet_id = azurerm_subnet.k8s_subnet.id
+  nsg_id  	= azurerm_network_security_group.k8s_nsg.id
+  rg_name   = azurerm_resource_group.k8s_rg.name 
+  password	= var.password
+  username	= var.username
+  vm-size	= var.k8s_vm-size
+}
+
+module "node04" {
+  source    = "./modules/ubuntu"
+  tag       = var.tag
+  prefix  	= var.k8s_prefix_node04
+  ip 	    = var.k8s_ip_node04
+  location  = var.location
+  subnet_id = azurerm_subnet.k8s_subnet.id
+  nsg_id  	= azurerm_network_security_group.k8s_nsg.id
+  rg_name   = azurerm_resource_group.k8s_rg.name 
+  password	= var.password
+  username	= var.username
+  vm-size	= var.k8s_vm-size
+}
+
+
+module "node05" {
+  source    = "./modules/ubuntu"
+  tag       = var.tag
+  prefix  	= var.k8s_prefix_node05
+  ip 	    = var.k8s_ip_node05
+  location  = var.location
+  subnet_id = azurerm_subnet.k8s_subnet.id
+  nsg_id  	= azurerm_network_security_group.k8s_nsg.id
+  rg_name   = azurerm_resource_group.k8s_rg.name 
+  password	= var.password
+  username	= var.username
+  vm-size	= var.k8s_vm-size
+}
+
 
 
 resource "null_resource" "create-json" {
     provisioner "local-exec" {
-      command = "echo '{\"k8s_master_ip\":\"${module.master.public_ip}\", \"k8s_node01_ip\":\"${module.node01.public_ip}\", \"k8s_node02_ip\":\"${module.node02.public_ip}\"}' > ../../k8s.json"
+      command = "echo '{\"k8s_master_ip\":\"${module.master.public_ip}\", \"k8s_node01_ip\":\"${module.node01.public_ip}\", \"k8s_node02_ip\":\"${module.node02.public_ip}\", \"k8s_node03_ip\":\"${module.node03.public_ip}\", \"k8s_node04_ip\":\"${module.node04.public_ip}\", \"k8s_node05_ip\":\"${module.node05.public_ip}\"}' > ../../k8s.json"
   }
 
     provisioner "local-exec" {
@@ -175,6 +218,14 @@ output "k8s_node01_Public_IP" {
 output "k8s_node02_Public_IP" {
   value = module.node02.public_ip
 }
-
+output "k8s_node03_Public_IP" {
+  value = module.node03.public_ip
+}
+output "k8s_node04_Public_IP" {
+  value = module.node04.public_ip
+}
+output "k8s_node05_Public_IP" {
+  value = module.node05.public_ip
+}
 
 

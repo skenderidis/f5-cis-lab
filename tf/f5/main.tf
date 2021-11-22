@@ -167,7 +167,6 @@ resource "null_resource" "create-f5json" {
       command = "rm ../../f5.json"
       on_failure = continue
   }
-
 }
 
 resource "null_resource" "create-file-for-peering" {

@@ -39,8 +39,8 @@ variable allowedIPs				{default = ["0.0.0.0/0"]}
 
 ##################   F5 Image related	 ##############
 
-variable f5_version 			{default = "15.1.201000"}
-variable f5_image_name 			{default = "f5-bigip-virtual-edition-25m-best-hourly" }
+variable f5_version 			{default = "15.1.400000"}
+variable f5_image_name 			{default = "f5-bigip-virtual-edition-200m-best-hourly" }
 variable f5_product_name 		{default = "f5-big-ip-best"}
 variable f5_instance_type 		{default = "Standard_DS4_v2"}
 

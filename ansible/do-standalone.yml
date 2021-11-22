@@ -3,8 +3,19 @@
   hosts: bigip
   connection: local
   gather_facts: false
-
+  vars:
+    provider:
+      password: "{{f5_pass}}"
+      server: "{{inventory_hostname}}"
+      user: "{{f5_user}}"
+      validate_certs: no
+      server_port: 443
   tasks:
+  - name: Wait for BIGIP to be on a ready state
+    bigip_wait:
+      provider: "{{ provider }}"
+    delegate_to: localhost
+
   - name: PUSH DO
     uri:
       url: "https://{{ inventory_hostname }}/mgmt/shared/declarative-onboarding"

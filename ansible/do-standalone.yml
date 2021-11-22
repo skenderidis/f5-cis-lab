@@ -45,7 +45,7 @@
     register: do_task_response
     changed_when: do_task_response.status == 200  
     retries: 120
-    until: do_task_response.json.result.status in ['ERROR', 'FAILED', 'OK'] or do_task_response.status == 200
+    until: do_task_response.status == 200
     delay: 3
 
   - name: DO Provisioning failed

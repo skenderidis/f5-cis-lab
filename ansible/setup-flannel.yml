@@ -20,6 +20,11 @@
       server_port: 443
 
   tasks:
+  - name: Wait for BIGIP to be on a ready state
+    bigip_wait:
+      provider: "{{ provider }}"
+    delegate_to: localhost
+
   - name: create Flannel Vxlan Profile
     bigip_command:
       commands:

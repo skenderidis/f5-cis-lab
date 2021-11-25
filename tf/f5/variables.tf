@@ -31,6 +31,10 @@ variable ext_subnet_cidr  		{default = "10.1.10.0/24" }
 variable self_ip_mgmt_01  		{default = "10.1.1.4"}
 variable self_ip_ext_01  		{default = "10.1.10.4"}
 variable app_ip_01        		{default = "10.1.10.10"}
+variable app_ip_02        		{default = "10.1.10.20"}
+variable app_ip_03        		{default = "10.1.10.30"}
+variable app_ip_04        		{default = "10.1.10.40"}
+
 variable self_ip_int_01  		{default = "10.1.20.4"}
 variable prefix_bigip  			{default = "bigip"}
 

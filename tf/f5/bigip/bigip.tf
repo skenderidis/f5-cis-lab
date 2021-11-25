@@ -10,7 +10,39 @@ resource "azurerm_public_ip" "pip_app1" {
     owner = var.tag
   }  
 }
-
+resource "azurerm_public_ip" "pip_app2" {
+  name                      = "${var.prefix}_app2_pip"
+  location                  = var.location
+  sku				                = "Standard"
+  availability_zone         = "No-Zone"
+  resource_group_name       = var.rg_name
+  allocation_method         = "Static"
+  tags = {
+    owner = var.tag
+  }  
+}
+resource "azurerm_public_ip" "pip_app3" {
+  name                      = "${var.prefix}_app3_pip"
+  location                  = var.location
+  sku				                = "Standard"
+  availability_zone         = "No-Zone"
+  resource_group_name       = var.rg_name
+  allocation_method         = "Static"
+  tags = {
+    owner = var.tag
+  }  
+}
+resource "azurerm_public_ip" "pip_app4" {
+  name                      = "${var.prefix}_app4_pip"
+  location                  = var.location
+  sku				                = "Standard"
+  availability_zone         = "No-Zone"
+  resource_group_name       = var.rg_name
+  allocation_method         = "Static"
+  tags = {
+    owner = var.tag
+  }  
+}
 
 # Create a Public IP for BIGIP Management
 resource "azurerm_public_ip" "public_ip_mgmt" {
@@ -88,7 +120,29 @@ resource "azurerm_network_interface" "ext_nic" {
     private_ip_address_allocation = "Static"
     private_ip_address			      = var.app_ip_01
     public_ip_address_id          = azurerm_public_ip.pip_app1.id
- }
+  }
+  ip_configuration {
+    name                          = "App02"
+    subnet_id                     = var.ext_subnet_id
+    private_ip_address_allocation = "Static"
+    private_ip_address			      = var.app_ip_02
+    public_ip_address_id          = azurerm_public_ip.pip_app2.id
+   }
+  ip_configuration {
+    name                          = "App03"
+    subnet_id                     = var.ext_subnet_id
+    private_ip_address_allocation = "Static"
+    private_ip_address			      = var.app_ip_03
+    public_ip_address_id          = azurerm_public_ip.pip_app3.id
+  }
+  ip_configuration {
+    name                          = "App04"
+    subnet_id                     = var.ext_subnet_id
+    private_ip_address_allocation = "Static"
+    private_ip_address			      = var.app_ip_04
+    public_ip_address_id          = azurerm_public_ip.pip_app4.id
+  }
+
   tags = {
     owner = var.tag
   }

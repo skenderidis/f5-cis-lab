@@ -35,4 +35,7 @@ variable "self_ip_mgmt"         {}
 variable "self_ip_ext"          {}
 variable "self_ip_int"          {}
 variable "app_ip_01"            {}
+variable "app_ip_02"            {}
+variable "app_ip_03"            {}
+variable "app_ip_04"            {}
 

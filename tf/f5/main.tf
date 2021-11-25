@@ -142,6 +142,9 @@ module "azure_f5" {
   self_ip_ext 		  = var.self_ip_ext_01
   self_ip_int 		  = var.self_ip_int_01
   app_ip_01         = var.app_ip_01
+  app_ip_02         = var.app_ip_02
+  app_ip_03         = var.app_ip_03
+  app_ip_04         = var.app_ip_04
   f5_instance_type  = var.f5_instance_type
   f5_version        = var.f5_version
   f5_image_name     = var.f5_image_name

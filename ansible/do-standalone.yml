@@ -3,8 +3,21 @@
   hosts: bigip
   connection: local
   gather_facts: false
-
+  vars:
+    provider:
+      password: "{{f5_pass}}"
+      server: "{{inventory_hostname}}"
+      user: "{{f5_user}}"
+      validate_certs: no
+      server_port: 443
   tasks:
+
+  - name: Wait for BIGIP to be on a ready state
+    bigip_wait:
+      provider: "{{ provider }}"
+    delegate_to: localhost
+
+
   - name: PUSH DO
     uri:
       url: "https://{{ inventory_hostname }}/mgmt/shared/declarative-onboarding"
@@ -34,7 +47,7 @@
     register: do_task_response
     changed_when: do_task_response.status == 200  
     retries: 120
-    until: do_task_response.json.result.status in ['ERROR', 'FAILED', 'OK'] or do_task_response.status == 200
+    until: do_task_response.status == 200
     delay: 3
 
   - name: DO Provisioning failed

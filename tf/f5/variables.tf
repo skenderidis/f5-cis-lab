@@ -31,6 +31,10 @@ variable ext_subnet_cidr  		{default = "10.1.10.0/24" }
 variable self_ip_mgmt_01  		{default = "10.1.1.4"}
 variable self_ip_ext_01  		{default = "10.1.10.4"}
 variable app_ip_01        		{default = "10.1.10.10"}
+variable app_ip_02        		{default = "10.1.10.20"}
+variable app_ip_03        		{default = "10.1.10.30"}
+variable app_ip_04        		{default = "10.1.10.40"}
+
 variable self_ip_int_01  		{default = "10.1.20.4"}
 variable prefix_bigip  			{default = "bigip"}
 
@@ -40,8 +44,8 @@ variable allowedIPs				{default = ["0.0.0.0/0"]}
 ##################   F5 Image related	 ##############
 
 variable f5_version 			{default = "15.1.400000"}
-variable f5_image_name 			{default = "f5-bigip-virtual-edition-200m-good-hourly" }
-variable f5_product_name 		{default = "f5-big-ip-good"}
+variable f5_image_name 			{default = "f5-bigip-virtual-edition-200m-best-hourly" }
+variable f5_product_name 		{default = "f5-big-ip-best"}
 variable f5_instance_type 		{default = "Standard_DS4_v2"}
 
 variable do_url 				{default = "https://github.com/F5Networks/f5-declarative-onboarding/releases/download/v1.25.0/f5-declarative-onboarding-1.25.0-7.noarch.rpm"}

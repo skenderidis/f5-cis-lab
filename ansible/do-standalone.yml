@@ -11,13 +11,19 @@
       validate_certs: no
       server_port: 443
   tasks:
+<<<<<<< HEAD
 
+=======
+>>>>>>> d0249d3c076f215d08406e227e520a8292cd0969
   - name: Wait for BIGIP to be on a ready state
     bigip_wait:
       provider: "{{ provider }}"
     delegate_to: localhost
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d0249d3c076f215d08406e227e520a8292cd0969
   - name: PUSH DO
     uri:
       url: "https://{{ inventory_hostname }}/mgmt/shared/declarative-onboarding"

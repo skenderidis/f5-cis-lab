@@ -4,11 +4,12 @@
 [nodes]
 {{k8s_node01_ip}} node_ip=10.10.50.20 short=node01
 {{k8s_node02_ip}} node_ip=10.10.50.30 short=node02
+{{k8s_node03_ip}} node_ip=10.10.50.40 short=node03
+{{k8s_node04_ip}} node_ip=10.10.50.50 short=node04
+{{k8s_node05_ip}} node_ip=10.10.50.60 short=node05
 
 [bigip]
-{{bigip_01_mgmt}} f5_user={{f5_user}} f5_pass={{f5_pass}} ha=primary
-{{bigip_02_mgmt}} f5_user={{f5_user}} f5_pass={{f5_pass}} ha=secondary
-
+{{mgmt_ip}} f5_user={{f5_user}} f5_pass={{f5_pass}}
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3

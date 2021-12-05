@@ -4,7 +4,7 @@ cd tf/f5
 terraform init
 terraform apply --auto-approve
 
-cd ../k8s
+cd ../k8s-5nodes
 terraform init
 terraform apply --auto-approve
 

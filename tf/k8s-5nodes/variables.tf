@@ -28,9 +28,16 @@ variable k8s_subnet_cidr  		{default = "10.10.50.0/24"}
 variable k8s_ip_master  		{default = "10.10.50.10"}
 variable k8s_ip_node01  		{default = "10.10.50.20"}
 variable k8s_ip_node02  		{default = "10.10.50.30"}
+variable k8s_ip_node03  		{default = "10.10.50.40"}
+variable k8s_ip_node04  		{default = "10.10.50.50"}
+variable k8s_ip_node05  		{default = "10.10.50.60"}
+
 variable k8s_prefix_master		{default = "master"}
 variable k8s_prefix_node01		{default = "node01"}
 variable k8s_prefix_node02		{default = "node02"}
+variable k8s_prefix_node03		{default = "node03"}
+variable k8s_prefix_node04		{default = "node04"}
+variable k8s_prefix_node05		{default = "node05"}
 variable k8s_vm-size			{default = "Standard_D8_v4"}
 variable allowedIPs				{default = ["0.0.0.0/0"]}
 

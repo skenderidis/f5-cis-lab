@@ -7,7 +7,7 @@
       repo: https://github.com/skenderidis/f5-cis-lab
       dest: /home/{{ansible_user}}/f5-cis-lab
 
-  - name: Remove kubernetes directory
+  - name: Remove kubernetes directory (if exists)
     file: path=/home/{{ansible_user}}/kubernetes state=absent
 
   - name: Move kubernetes to different directory

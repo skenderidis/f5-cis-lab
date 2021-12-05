@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-plus-echo
+spec:
+  ingressClassName: nginx-plus
+  rules:
+  - host: plus.f5demo.cloud
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: echo-svc
+            port:
+              number: 80

@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: f5cis
+  namespace: kube-system
+spec:
+# DO NOT INCREASE REPLICA COUNT
+  replicas: 1
+  selector:
+    matchLabels:
+      app: f5cis
+  template:
+    metadata:
+      labels:
+        app: f5cis
+    spec:
+      # Name of the Service Account bound to a Cluster Role with the required
+      # permissions
+      containers:
+        - name: k8s-bigip-ctlr
+          image: "quay.io/f5networks/k8s-bigip-ctlr-devel:8a3e60113ef165bbf7d784e04cea91099ffaf7d6"
+          #image: "f5networks/k8s-bigip-ctlr:2.7.0"
+          env:
+            - name: BIGIP_USERNAME
+              valueFrom:
+                secretKeyRef:
+                # Replace with the name of the Secret containing your login
+                # credentials
+                  name: bigip-login
+                  key: username
+            - name: BIGIP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                # Replace with the name of the Secret containing your login
+                # credentials
+                  name: bigip-login
+                  key: password
+          command: ["/app/bin/k8s-bigip-ctlr"]
+          args: [
+            # See the k8s-bigip-ctlr documentation for information about
+            # all config options
+            # https://clouddocs.f5.com/containers/latest/
+            "--bigip-username=$(BIGIP_USERNAME)",
+            "--bigip-password=$(BIGIP_PASSWORD)",
+            "--bigip-url=192.168.3.103",
+            "--bigip-partition=cis",
+            "--node-poll-interval=30",
+            "--verify-interval=30",
+#            "--pool-member-type=cluster",
+            "--custom-resource-mode=true",
+            "--log-level=DEBUG",
+            #"--flannel-name=/Common/fl-tunnel",
+            "--log-as3-response=true",
+            "--agent=as3",
+            "--ipam=true",
+            #"--ingress-link-mode=true",
+            "--share-nodes=true",
+            "--insecure"
+            ]
+      serviceAccount: bigip-ctlr
+      serviceAccountName: bigip-ctlr
+      imagePullSecrets:
+          # Secret that gives access to a private docker registry
+          #- name: f5-docker-images
+          # Secret containing the BIG-IP system login credentials
+          - name: bigip-login

@@ -2,13 +2,10 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
  name: cis-fqdn-based-routing
- namespace: default
  annotations:
   # Provide an IP address for the BIG-IP Virtual Server.
   virtual-server.f5.com/ip: "10.1.10.50"
-  # BIG-IP partition
-  virtual-server.f5.com/partition: "k8s"
-  # Load balancing algorithm
+  # BIG-IP LB method
   virtual-server.f5.com/balance: "round-robin"
   # Specify the port you want to handle requests
   virtual-server.f5.com/http-port: "80"
@@ -17,7 +14,7 @@ spec:
  ingressClassName: f5
  rules:
  # URL
- - host: app1.f5demo.local
+ - host: fqdn1.f5demo.local
    http:
      # path to Service from URL
      paths:
@@ -29,7 +26,7 @@ spec:
              port:
                number: 80
  # URL
- - host: app2.f5demo.local
+ - host: fqdn2.f5demo.local
    http:
      # path to Service from URL
      paths:

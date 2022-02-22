@@ -1,0 +1,46 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ing1
+  namespace: default
+  annotations:
+    # BIG-IP Virtual Server IP address
+    virtual-server.f5.com/ip: "10.1.10.50"
+    # BIG-IP Health Monitor
+    virtual-server.f5.com/health: |
+      [
+        {
+          "path":     "health1.example.com/app1",
+          "send":     "HTTP GET /health/app1",
+          "interval": 5,
+          "timeout":  10
+        }, {
+          "path":     "health2.example.com/app2",
+          "send":     "HTTP GET /health/app2",
+          "interval": 5,
+          "timeout":  8
+        }
+      ]
+spec:
+  ingressClassName: f5
+  rules:
+  - host: health1.example.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: app1-svc
+            port:
+              number: 8080
+        path: /app1
+        pathType: Prefix
+  - host: health2.example.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: app2-svc
+            port:
+              number: 8080
+        path: /app2
+        pathType: Prefix

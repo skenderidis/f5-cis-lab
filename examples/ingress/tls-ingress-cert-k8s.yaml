@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    # IP address of a BIG-IP pool member
+    virtual-server.f5.com/ip: "10.1.10.50"
+    ingress.kubernetes.io/ssl-redirect: "true"
+    ingress.kubernetes.io/allow-http: "false"
+spec:
+  ingressClassName: f5
+  tls:
+  - hosts:
+    - k8s-tls.f5demo.cloud
+    #Referencing this secret in an Ingress tells the Ingress controller to 
+    #secure the channel from the client to the load balancer using TLS
+    secretName: apps-tls-secret
+  rules:
+    - host: k8s-tls.f5demo.cloud
+      http:
+      # path to Service from URL
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: app1-svc
+              port:
+                number: 80

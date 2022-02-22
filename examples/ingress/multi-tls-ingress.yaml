@@ -8,7 +8,7 @@ metadata:
     # Specifies an already-configured SSL Profile on BIG-IP that should be
     # used for this Ingress.
     # Follows the format "/partition/profile_name".
-    virtual-server.f5.com/clientssl: '[ { "hosts": [ "app-ssl.f5demo.local" ], "bigIpProfile": "/Common/clientssl" }, { "hosts": [ "app-ssl-2.f5demo.local" ], "bigIpProfile": "/Common/clientssl" }  ]'
+    virtual-server.f5.com/clientssl: '[ { "hosts": [ "app-ssl-1.f5demo.local" ], "bigIpProfile": "/Common/clientssl" }, { "hosts": [ "app-ssl-2.f5demo.local" ], "bigIpProfile": "/Common/clientssl" }  ]'
     # Allow/deny TLS connections
     ingress.kubernetes.io/ssl-redirect: "true"
     # Allow/deny HTTP connections
@@ -17,7 +17,7 @@ spec:
   # Provide the IngressClassName as "f5"
   ingressClassName: f5
   rules:
-    - host: app-ssl.f5demo.local
+    - host: app-ssl-1.f5demo.local
       http:
         paths:
           - path: /

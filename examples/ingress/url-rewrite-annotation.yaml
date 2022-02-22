@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    virtual-server.f5.com/rewrite-target-url: "new_app.f5demo.local"
+  name: rewrite-siteurl
+  namespace: default
+spec:
+  rules:
+  - host: app1.f5demo.local
+    http:
+      paths:
+      - backend:
+          serviceName: app1-svc
+          servicePort: 80
+          path: /

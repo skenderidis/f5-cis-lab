@@ -1,0 +1,39 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tls-on-bigip
+  annotations:
+    # Provide an IP address for the BIG-IP Virtual Server.
+    virtual-server.f5.com/ip: "10.1.10.50"
+    # Specifies an already-configured SSL Profile on BIG-IP that should be
+    # used for this Ingress.
+    # Follows the format "/partition/profile_name".
+    virtual-server.f5.com/clientssl: '[ { "hosts": [ "app-ssl.f5demo.local" ], "bigIpProfile": "/Common/clientssl" }, { "hosts": [ "app-ssl-2.f5demo.local" ], "bigIpProfile": "/Common/clientssl" }  ]'
+    # Allow/deny TLS connections
+    ingress.kubernetes.io/ssl-redirect: "true"
+    # Allow/deny HTTP connections
+    ingress.kubernetes.io/allow-http: "false"
+spec:
+  # Provide the IngressClassName as "f5"
+  ingressClassName: f5
+  rules:
+    - host: app-ssl.f5demo.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: app1-svc
+                port:
+                  number: 80
+    - host: app-ssl-2.f5demo.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: app2-svc
+                port:
+                  number: 80

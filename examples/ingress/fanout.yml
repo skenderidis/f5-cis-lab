@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: cis-fanout
+  name: fanout
   annotations:
     # Provide an IP address for the BIG-IP Virtual Server.
     virtual-server.f5.com/ip: "10.1.10.50"

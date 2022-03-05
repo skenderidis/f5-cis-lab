@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
- name: cis-fqdn-based-routing
+ name: fqdn-based-routing
  annotations:
   # Provide an IP address for the BIG-IP Virtual Server.
   virtual-server.f5.com/ip: "10.1.10.50"
@@ -30,7 +30,7 @@ spec:
    http:
      # path to Service from URL
      paths:
-       - path: /
+       - path: /test
          pathType: Prefix
          backend:
            service:

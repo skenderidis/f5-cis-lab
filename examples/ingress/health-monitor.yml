@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ing1
+  name: health-monitor
   namespace: default
   annotations:
     # BIG-IP Virtual Server IP address
@@ -10,37 +10,37 @@ metadata:
     virtual-server.f5.com/health: |
       [
         {
-          "path":     "health1.example.com/app1",
-          "send":     "HTTP GET /health/app1",
-          "interval": 5,
+          "path":     "health1.f5demo.local/echo",
+          "send":     "HTTP GET /health/echo",
+          "interval": 3,
           "timeout":  10
         }, {
-          "path":     "health2.example.com/app2",
-          "send":     "HTTP GET /health/app2",
-          "interval": 5,
+          "path":     "health2.f5demo.local/myapp",
+          "send":     "HTTP GET /health/myapp",
+          "interval": 3,
           "timeout":  8
         }
       ]
 spec:
   ingressClassName: f5
   rules:
-  - host: health1.example.com
+  - host: health1.f5demo.local
     http:
       paths:
       - backend:
           service:
-            name: app1-svc
+            name: echo-svc
             port:
-              number: 8080
-        path: /app1
+              number: 80
+        path: /echo
         pathType: Prefix
   - host: health2.example.com
     http:
       paths:
       - backend:
           service:
-            name: app2-svc
+            name: myapp-svc
             port:
-              number: 8080
-        path: /app2
+              number: 80
+        path: /myapp
         pathType: Prefix

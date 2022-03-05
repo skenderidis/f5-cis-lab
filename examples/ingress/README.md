@@ -3,21 +3,19 @@
 In this section we provide examples for the most common use-cases of Ingress Resources with F5 CIS
 
 - [Basic-Ingress](#Basic-Ingress)
-- [FQDN Based Routing](#FQDN Based Routing)
-- [Installation](#installation)
+- [FQDN-Based-Routing](#FQDN-Based-Routing)
+- [FanOut/Path-Based-Routing](#FanOut/Path-Based-Routing)
 - [Use-cases](#use-cases)
 - [Variables](#variables)
 
-
 ## Basic-Ingress
-The following example deploys a basic ingress resource for a single service.
-
+The following example deploys a basic ingress resource for a single K8s service.
+Create the Ingress resource
 ```
 kubectl apply -f basic-ingress.yml
 ```
 
-You can confirm that the Ingress works:
-
+To confirm that the Ingress works:
 ```
 kubectl describe ing basic-ingress
 ```
@@ -27,14 +25,15 @@ You should see that following output. Notice that the value for Host and Path (m
 You can access the service with the use of curl on the IP address assigned for the ingress. 
 
 ```
-curl http://10.1.10.40
-curl http://10.1.10.40/test.php
+curl http://10.1.10.51 
+curl http://10.1.10.51/test.php\
+curl http://test.f5demo.local --resolve test.f5demo.local:80:10.1.10.13
 ```
-In both cases you should see that following output:
+In all thress cases you should see that following output:
 
 
 
-## FQDN Based Routing
+## FQDN-Based-Routing
 The following example deploys an ingress resource that routes based on FQDN:
 fqdn1.f5demo.local => app1-svc
 fqdn2.f5demo.local => app2-svc
@@ -73,7 +72,7 @@ Note: Since we didn't define Host value on the Ingress resource, we can access t
 
 
 
-## FanOut (Path based routing)
+## FanOut/Path-Based-Routing
 The following example deploys an ingress resource that routes based on the uri path:
 fanout.f5demo.local/app1 => app1-svc
 fanout.f5demo.local/app2 => app2-svc

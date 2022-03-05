@@ -2,8 +2,8 @@
 
 In this section we provide examples for the most common use-cases of Ingress Resources with F5 CIS
 
-- [Basic-Ingress](# Basic-Ingress)
-- [FQDN Based Routing](# FQDN Based Routing)
+- [Basic-Ingress](#Basic-Ingress)
+- [FQDN Based Routing](#FQDN Based Routing)
 - [Installation](#installation)
 - [Use-cases](#use-cases)
 - [Variables](#variables)

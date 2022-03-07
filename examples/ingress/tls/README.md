@@ -43,7 +43,7 @@ Verify that the certificate exists (see below)
 
 Verify that the SSL Client Profile exists and is assigned the above certificate (see below)
 
-| SSL Profile             |  Profile Details |
+| SSL Client Profile       |  Profile Details |
 :-------------------------:|:-------------------------:
 ![ssl-profiles](images/ssl-profiles.png) | ![tls1](images/tls1.png) 
 
@@ -70,14 +70,13 @@ Verify that both certificates exists (see below)
 
 ![certificates-bigip](images/certificates-bigip-2.png)
 
-Verify that the SSL Client Profile exists for both certificates
-
-![ssl-profiles](images/ssl-profiles-2.png)
+Verify that the SSL Client Profile exists for both certificates and that at least one of the certificates (in this case tls1) is configured as the SNI default profile. Please select the tls1 profile and verify the configuration (marked in RED)
 
 
-One of the certificates (in this case tls1) has to be the SNI default profile. Please select the tls1 profile and verify the configuration (marked in RED)
 
-![sni-configured](images/sni-configured.png)
+| SSL Client Profiles      |  Profile SNI Details for TLS1 |
+:-------------------------:|:-------------------------:
+![ssl-profiles](images/ssl-profiles-2.png) | ![sni-configured](images/sni-configured.png)
 
 
 Create the ingress resource

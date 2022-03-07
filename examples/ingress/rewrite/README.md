@@ -1,24 +1,21 @@
 # Ingress Examples
 
-In this section we provide examples for the most common use-cases of Ingress Resources with F5 CIS
+In this section we provide 2 Rewrite examples
 
-- [Basic-Ingress](#Basic-Ingress)
-- [FQDN-Based-Routing](#FQDN-Based-Routing)
-- [FanOut/Path-Based-Routing](#FanOut/Path-Based-Routing)
-- [Use-cases](#use-cases)
-- [Variables](#variables)
+- [AppRoot-Rewrite](#AppRoot-Rewrite)
+- [URL-Rewrite](#URL-Rewrite)
 
-## AppRoot Rewrite
-The following example deploys an Ingress resource with rewrite-app-root annotation that will redirect any traffic for the root path `/` to `/approot1`
+## AppRoot-Rewrite
+In the following example we deploy an Ingress resource with rewrite-app-root annotation that will redirect any traffic for the root path `/` to `/approot1`.
 
 __http://rewrite1.f5demo.local/ => http://rewrite1.f5demo.local/approot1__
 
-Create the Ingress resource
+Create the Ingress resource.
 ```
 kubectl apply -f rewrite-app-root.yml
 ```
 
-Try accessing the service with the use of curl as per the examples below
+Try accessing the service.
 
 ```
 curl -v http://rewrite1.f5demo.local/ --resolve rewrite1.f5demo.local:80:10.1.10.50
@@ -31,16 +28,15 @@ Similarly if accessing the service `rewrite2.f5demo.local` the path will change 
 ![approot-rewrite-output](images/approot-rewrite-output.png)
 
 
-## URL Rewrite
-The following example deploys an Ingress resource that rewrites the URL from `lab.f5demo.local/mylab` to `laboratory.f5demo.local/mylaboratory`
+## URL-Rewrite
+In the following example we deploy an Ingress resource that rewrites the URL from `lab.f5demo.local/mylab` to `laboratory.f5demo.local/mylaboratory`.
 
-Create the Ingress resource
+Create the Ingress resource.
 ```
 kubectl apply -f url-rewrite-ingress.yml
 ```
 
-Try accessing the service with the use of curl as the example below
-
+Try accessing the service.
 ```
 curl http://lab.f5demo.local/mylab --resolve lab.f5demo.local:80:10.1.10.50
 ```

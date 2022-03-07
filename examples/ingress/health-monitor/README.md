@@ -18,7 +18,7 @@ You should see the following output. Notice on the annotation section the health
 ![health-monitor-output](images/health-monitor-output.png)
 
 
-On the BIGIP UI, you should see the application pool marked as green and a custom monitor assinged to the pool
+On the BIGIP UI, you should see the application pool marked as green and a custom monitor assigned to the pool
 
 | BIGIP Pool             |  Pool Details |
 :-------------------------:|:-------------------------:

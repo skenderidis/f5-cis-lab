@@ -1,5 +1,5 @@
 # FQDN-Based-Routing
-The following example deploys an Ingress resource that routes based on FQDNs:
+In the following example we deploy an Ingress resource that routes based on FQDNs:
 fqdn1.f5demo.local => app1-svc
 fqdn2.f5demo.local => app2-svc
 

@@ -1,4 +1,4 @@
-# Ingress Examples
+# Rewrite Examples
 
 In this section we provide 2 Rewrite examples
 

@@ -16,7 +16,7 @@ You should see the following output. Notice that the value of Host and Path (mar
 ![basic-ingress](images/basic-ingress.png)
 
 
-Access the service with the use of curl as per the examples below. 
+Access the service as per the examples below. 
 
 ```
 curl http://10.1.10.40 
@@ -24,6 +24,6 @@ curl http://10.1.10.40/test.php
 curl http://test.f5demo.local --resolve test.f5demo.local:80:10.1.10.40
 ```
 
-In all three cases you should see similar output:
+In all cases you should see similar output:
 
 ![basic-ingress-output](images/basic-ingress-output.png)

@@ -1,5 +1,5 @@
 # Basic-Ingress
-The following example deploys a basic ingress resource for a single K8s service.
+In the following example we deploy a basic ingress resource for a single K8s service.
 
 Create the Ingress resource.
 ```

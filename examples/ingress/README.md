@@ -2,17 +2,40 @@
 
 In this section we provide examples for the most common use-cases of Ingress Resources with F5 CIS
 
-- [Basic-Ingress](#Basic-Ingress)
-- [FQDN-Based-Routing](#FQDN-Based-Routing)
-- [FanOut/Path-Based-Routing](#FanOut/Path-Based-Routing)
-- [Use-cases](#use-cases)
-- [Variables](#variables)
+- [Basic-Ingress](basic-ingress)
+- [FQDN-Based-Routing](host-routing)
+- [Fan-out/Path-Based-Routing](fanout)
+- [Health Monitor](health-monitor)
+- [AppRoot/URL Rewrite](rewrite)
+- [TLS Ingress Examples](tls)
 
 Before starting with the examples below, please make sure of the following:
 
 -- Apps are running on the default namespace. --
 ```
-kubectl apply -f basic-ingress.yml
+kubectl get pod -n default
+
+#### Expected  Result #####
+NAME                     READY   STATUS    RESTARTS        AGE
+app1-676746bb5c-4h26n    1/1     Running   7 (2d1h ago)    11d
+app1-676746bb5c-thph5    1/1     Running   7 (9h ago)      11d
+app2-78c95bccb5-6r85l    1/1     Running   7 (2d1h ago)    11d
+app2-78c95bccb5-9r2qx    1/1     Running   7 (2d1h ago)    11d
+echo-7449946fc7-hg4ff    1/1     Running   10 (2d1h ago)   13d
+echo-7449946fc7-nn82f    1/1     Running   10 (9h ago)     13d
+myapp-6cc75dfc85-755qb   1/1     Running   7 (9h ago)      11d
+myapp-6cc75dfc85-z6cst   1/1     Running   7 (9h ago)      11d
+
 ```
 
 -- CIS is running --
+```
+kubectl get pod -n kube-system | grep f5
+
+#### Expected  Result #####
+NAME                                      READY   STATUS    RESTARTS        AGE
+f5-cis-crd-588bc4844f-64qjv               1/1     Running   12 (9h ago)     13d
+f5-cis-ingress-84856fd767-rnwd5           1/1     Running   12 (9h ago)     13d
+f5ipam-5bf9fbdb5-dzqwd                    1/1     Running   10 (2d1h ago)   13d
+
+```

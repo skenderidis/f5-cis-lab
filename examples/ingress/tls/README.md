@@ -8,7 +8,7 @@ In this section we provide 3 TLS examples
 - [Multi-TLS Ingress (certificate on BIGIP)](#multi-tls-ingress-certificate-on-bigip)
 
 ## TLS Ingress (certificate on K8s)
-The following example deploys a TLS ingress resource that has the certificate stored on K8s as a secret.
+In the following example we deploy a TLS ingress resource that has the certificate stored on K8s as a secret.
 
 Deploy the secret on Kubernetes that holds the certificate
 ```
@@ -29,7 +29,7 @@ You should see the following output. Please notice the `CN` value configured on 
 
 ![tls-ingress-k8s](images/tls-ingress-k8s.png)
 
-Also verify on BIGIP that a new certificate has been created under `cis-ingress` partition
+Verify that on BIGIP a new certificate has been created under `cis-ingress` partition
 
 ![tls-ingress-k8s-bigipui](images/tls-ingress-k8s-bigipui.png)
 
@@ -37,9 +37,15 @@ Also verify on BIGIP that a new certificate has been created under `cis-ingress`
 ## TLS Ingress (certificate on BIGIP)
 In the following example we deploy a TLS Ingress resource that has the certificate stored on BIGIP as a SSL Client Profile.
 
-Verify that the SSL Client Profile exists (see below)
+Verify that the certificate exists (see below)
 
 ![certificates-bigip](images/certificates-bigip.png)
+
+Verify that the SSL Client Profile exists and is assigned the above certificate (see below)
+
+| SSL Profile             |  Profile Details |
+:-------------------------:|:-------------------------:
+![ssl-profiles](images/ssl-profiles.png) | ![tls1](images/tls1.png) 
 
 Create the Ingress resource.
 ```
@@ -60,10 +66,18 @@ You should see the following output. Please notice the `CN` value configured on 
 ## Multi-TLS Ingress (certificate on BIGIP)
 In the following example we deploy an Ingress resource with 2 FQDNs that require different TLS certificates (stored on BIGIP).
 
-Verify that both SSL Client Profile exists (see below). 
-![certificates-bigip](images/certificates-bigip.png)
+Verify that both certificates exists (see below)
+
+![certificates-bigip](images/certificates-bigip-2.png)
+
+Verify that the SSL Client Profile exists for both certificates
+
+![ssl-profiles](images/ssl-profiles-2.png)
+
 
 One of the certificates (in this case tls1) has to be the SNI default profile. Please select the tls1 profile and verify the configuration (marked in RED)
+
+![sni-configured](images/sni-configured.png)
 
 
 Create the ingress resource

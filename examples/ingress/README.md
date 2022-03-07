@@ -32,13 +32,20 @@ kubectl describe ing basic-ingress
 
 You should see the following output. Notice that the value of Host and Path (marked in red) is configured as `*`. 
 
+![basic-ingress](images/basic-ingress.png)
+
+
 Access the service with the use of curl as per the examples below. 
+
 ```
 curl http://10.1.10.40 
 curl http://10.1.10.40/test.php
 curl http://test.f5demo.local --resolve test.f5demo.local:80:10.1.10.40
 ```
+
 In all three cases you should see similar output:
+
+![basic-ingress-output](images/basic-ingress-output.png)
 
 
 ## FQDN-Based-Routing
@@ -58,6 +65,8 @@ kubectl describe ing fqdn-based-routing
 
 You should see the following output. Notice that the value of Host is now defined ("fqdn1.f5demo.local" / "fqdn2.f5demo.local").
 
+![fqdn-based-routing](images/fqdn-based-routing.png)
+
 Try accessing the service with the use of curl on the IP address assigned for the ingress. 
 ```
 curl http://10.1.10.14
@@ -74,6 +83,7 @@ curl http://fqdn2.f5demo.local/ --resolve fqdn2.f5demo.local:80:10.1.10.50
 
 In both cases you should see that similar output but from different backend pods (app1 and app2 pods):
 
+![fqdn-based-routing-output](images/fqdn-based-routing-output.png)
 
 ## FanOut/Path-Based-Routing
 The following example deploys an Ingress resource that routes based on URL Path:
@@ -92,6 +102,8 @@ kubectl describe ing fanout
 
 Notice on the output that the value of Host is now defined "fanout.f5demo.local" and on the Path level there are 2 entries; __app1__ that points to `app1-svc` and __/app2__ that points to `app2-svc`.
 
+![fanout-output](images/fanout.png)
+
 Try accessing the service on a path that has not been defined on the Ingress resource.
 
 ```
@@ -109,6 +121,7 @@ curl http://fanout.f5demo.local/app2 --resolve fanout.f5demo.local:80:10.1.10.50
 
 In all cases you should see similar outputs but from different backend pods (__app1__ and __app2__ pods) depending on the path.
 
+![fanout-output](images/fanout-output.png)
 
 
 ## Health Monitors
@@ -128,8 +141,14 @@ kubectl describe ing health-monitor
 
 You should see the following output. Notice on the annotation section the health monitors have been defined.
 
+![health-monitor-output](images/health-monitor-output.png)
 
-On the BIGIP UI, you should see also the pools marked as green
+
+On the BIGIP UI, you should see the application pool marked as green and a custom monitor assinged to the pool
+
+| BIGIP Pool             |  Pool Details |
+:-------------------------:|:-------------------------:
+![health-monitor-bigip-1](images/health-monitor-bigip-1.png)  |  ![health-monitor-bigip-2](images/health-monitor-bigip-2.png)
 
 
 ## AppRoot Rewrite
@@ -152,6 +171,8 @@ curl -v http://rewrite2.f5demo.local/ --resolve rewrite2.f5demo.local:80:10.1.10
 You should see that the path that was send on the backend application has been changed from `/` to `/approot1`.
 Similarly if accessing the service `rewrite2.f5demo.local` the path will change to `approot2`
 
+![approot-rewrite-output](images/approot-rewrite-output.png)
+
 
 
 ## URL Rewrite
@@ -162,16 +183,15 @@ Create the Ingress resource
 kubectl apply -f url-rewrite-ingress.yml
 ```
 
-
 Try accessing the service with the use of curl as the example below
 
 ```
 curl http://lab.f5demo.local/mylab --resolve lab.f5demo.local:80:10.1.10.50
 ```
 
-
 You should see that the Hostname and Path that was send on the backend application has been changed as per the Ingress resource configuration.
 
+![url-rewrite-output](images/url-rewrite-output.png)
 
 
 ## TLS Ingress (certificate on K8s)
@@ -194,7 +214,11 @@ curl -vk https://tls-k8s.f5demo.local --resolve tls-k8s.f5demo.local:443:10.1.10
 
 You should see the following output. Please notice the `CN` value configured on the certificate
 
+![tls-ingress-k8s](images/tls-ingress-k8s.png)
 
+Also verify on BIGIP that a new certificate has been created under `cis-ingress` partition
+
+![tls-ingress-k8s-bigipui](images/tls-ingress-k8s-bigipui.png)
 
 
 ## TLS Ingress (certificate on BIGIP)
@@ -202,6 +226,7 @@ The following example deploys a TLS ingress resource that has the certificate st
 
 Verify that the SSL Client Profile exists (see below)
 
+![certificates-bigip](images/certificates-bigip.png)
 
 Create the Ingress resource
 ```
@@ -216,6 +241,8 @@ curl -vk https://tls1.f5demo.local --resolve tls1.f5demo.local:443:10.1.10.52
 
 You should see the following output. Please notice the `CN` value configured on the certificate. We use curl's -k option to turn off certificate verification and the -v option to get the TLS certificate details
 
+![tls-ingress-bigip](images/tls-ingress-bigip.png)
+
 
 
 
@@ -223,6 +250,7 @@ You should see the following output. Please notice the `CN` value configured on 
 The following example deploys an ingress resource with 2 FQDNs that require different TLS certificates (stored on BIGIP).
 
 Verify that both SSL Client Profile exists (see below). 
+![certificates-bigip](images/certificates-bigip.png)
 
 One of the certificates (in this case tls1) has to be the SNI default profile. Please select the tls1 profile and verify the configuration (marked in RED)
 
@@ -241,4 +269,4 @@ curl -vk https://tls2.f5demo.local --resolve tls2.f5demo.local:443:10.1.10.53
 
 You should see the following output. Notice that the `CN` value change based on the FQDN as a different certificate gets presented to the client.
 
-
+![multi-tls-ingress-bigip](images/multi-tls-ingress-bigip.png)

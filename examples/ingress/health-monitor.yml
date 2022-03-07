@@ -9,14 +9,9 @@ metadata:
     # BIG-IP Health Monitor
     virtual-server.f5.com/health: |
       [
-        {
-          "path":     "health1.f5demo.local/echo",
-          "send":     "HTTP GET /health/echo",
-          "interval": 3,
-          "timeout":  10
-        }, {
-          "path":     "health2.f5demo.local/myapp",
-          "send":     "HTTP GET /health/myapp",
+       {
+          "path":     "health1.f5demo.local/myapp",
+          "send":     "GET /health/myapp",
           "interval": 3,
           "timeout":  8
         }
@@ -25,16 +20,6 @@ spec:
   ingressClassName: f5
   rules:
   - host: health1.f5demo.local
-    http:
-      paths:
-      - backend:
-          service:
-            name: echo-svc
-            port:
-              number: 80
-        path: /echo
-        pathType: Prefix
-  - host: health2.example.com
     http:
       paths:
       - backend:

@@ -112,11 +112,9 @@ In all cases you should see similar outputs but from different backend pods (__a
 
 
 ## Health Monitors
-The following example deploys an Ingress resource with health monitors to verify that the backend services are working properly.
+The following example deploys an Ingress resource with health monitor to verify that the K8S service is working properly.
 
 __"HTTP GET /health/echo" => health-monitor-1__
-
-__"HTTP GET /health/myapp" => health-monitor-2__
 
 Create the Ingress resource
 ```
@@ -147,8 +145,8 @@ kubectl apply -f rewrite-app-root.yml
 Try accessing the service with the use of curl as per the examples below
 
 ```
-curl http://rewrite1.f5demo.local/ --resolve rewrite1.f5demo.local:80:10.1.10.50
-curl http://rewrite2.f5demo.local/ --resolve rewrite2.f5demo.local:80:10.1.10.50
+curl -v http://rewrite1.f5demo.local/ --resolve rewrite1.f5demo.local:80:10.1.10.50
+curl -v http://rewrite2.f5demo.local/ --resolve rewrite2.f5demo.local:80:10.1.10.50
 ```
 
 You should see that the path that was send on the backend application has been changed from `/` to `/approot1`.
@@ -191,7 +189,7 @@ kubectl apply -f tls-cert-k8s.yml
 
 Try accessing the service with the use of curl as per the example below. We use curl's -k option to turn off certificate verification and the -v option to get the TLS certificate details
 ```
-curl -vk https://tls-k8s.f5demo.local --resolve tls-k8s.f5demo.local:443:10.1.10.13
+curl -vk https://tls-k8s.f5demo.local --resolve tls-k8s.f5demo.local:443:10.1.10.51
 ```
 
 You should see the following output. Please notice the `CN` value configured on the certificate
@@ -213,7 +211,7 @@ kubectl apply -f tls-cert-bigip.yml
 Try accessing the service with the use of curl as the example below
 
 ```
-curl -vk https://tls1.f5demo.local --resolve tls1.f5demo.local:443:10.1.10.13
+curl -vk https://tls1.f5demo.local --resolve tls1.f5demo.local:443:10.1.10.52
 ```
 
 You should see the following output. Please notice the `CN` value configured on the certificate. We use curl's -k option to turn off certificate verification and the -v option to get the TLS certificate details
@@ -237,8 +235,8 @@ kubectl apply -f multi-tls-cert-bigip.yml
 Try accessing both services with the use of curl as per the examples below. We use curl's -k option to turn off certificate verification and the -v option to get the TLS certificate details
 
 ```
-curl -vk https://tls1.f5demo.local --resolve tls1.f5demo.local:443:10.1.10.13
-curl -vk https://tls2.f5demo.local --resolve tls2.f5demo.local:443:10.1.10.13
+curl -vk https://tls1.f5demo.local --resolve tls1.f5demo.local:443:10.1.10.53
+curl -vk https://tls2.f5demo.local --resolve tls2.f5demo.local:443:10.1.10.53
 ```
 
 You should see the following output. Notice that the `CN` value change based on the FQDN as a different certificate gets presented to the client.

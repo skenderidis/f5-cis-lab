@@ -16,7 +16,7 @@ spec:
         paths:
           - backend:
               service:
-                name: app2-svc
+                name: echo-svc
                 port:
                   number: 80
             path: /mylab

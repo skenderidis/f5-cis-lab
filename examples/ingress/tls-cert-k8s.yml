@@ -4,7 +4,7 @@ metadata:
   name: tls-cert-k8s
   annotations:
     # IP address of a BIG-IP pool member
-    virtual-server.f5.com/ip: "10.1.10.60"
+    virtual-server.f5.com/ip: "10.1.10.51"
     ingress.kubernetes.io/ssl-redirect: "true"
     ingress.kubernetes.io/allow-http: "false"
 spec:

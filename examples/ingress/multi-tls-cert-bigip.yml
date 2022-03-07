@@ -4,7 +4,7 @@ metadata:
   name: multi-tls-cert-bigip
   annotations:
     # Provide an IP address for the BIG-IP Virtual Server.
-    virtual-server.f5.com/ip: "10.1.10.13"
+    virtual-server.f5.com/ip: "10.1.10.53"
     # Specifies an already-configured SSL Profile on BIG-IP that should be
     # used for this Ingress.
     # Follows the format "/partition/profile_name".

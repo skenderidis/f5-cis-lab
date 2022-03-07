@@ -3,10 +3,35 @@
 In this section we provide 3 TLS examples
 
 
-- [TLS Ingress (certificate on BIGIP)](#TLS Ingress (certificate on BIGIP))
-- [TLS Ingress (certificate on BIGIP)](#TLS Ingress (certificate on BIGIP))
-- [TLS Ingress (certificate on BIGIP)](#TLS Ingress (certificate on BIGIP))
+- TLS Ingress (certificate on K8s)
+- TLS Ingress (certificate on BIGIP)
+- Multi-TLS Ingress (certificate on BIGIP)
 
+## TLS Ingress (certificate on K8s)
+The following example deploys a TLS ingress resource that has the certificate stored on K8s as a secret.
+
+Deploy the secret on Kubernetes that holds the certificate
+```
+kubectl apply -f apps-tls-secret.yml
+```
+
+Create the Ingress resource
+```
+kubectl apply -f tls-cert-k8s.yml
+```
+
+Try accessing the service with the use of curl as per the example below. We use curl's -k option to turn off certificate verification and the -v option to get the TLS certificate details
+```
+curl -vk https://tls-k8s.f5demo.local --resolve tls-k8s.f5demo.local:443:10.1.10.51
+```
+
+You should see the following output. Please notice the `CN` value configured on the certificate
+
+![tls-ingress-k8s](images/tls-ingress-k8s.png)
+
+Also verify on BIGIP that a new certificate has been created under `cis-ingress` partition
+
+![tls-ingress-k8s-bigipui](images/tls-ingress-k8s-bigipui.png)
 
 
 ## TLS Ingress (certificate on BIGIP)
@@ -32,7 +57,7 @@ You should see the following output. Please notice the `CN` value configured on 
 ![tls-ingress-bigip](images/tls-ingress-bigip.png)
 
 
-## TLS Ingress (certificate on BIGIP)
+## Multi-TLS Ingress (certificate on BIGIP)
 In the following example we deploy an Ingress resource with 2 FQDNs that require different TLS certificates (stored on BIGIP).
 
 Verify that both SSL Client Profile exists (see below). 

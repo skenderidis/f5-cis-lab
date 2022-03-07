@@ -1,7 +1,9 @@
 # FQDN-Based-Routing
 In the following example we deploy an Ingress resource that routes based on FQDNs:
-fqdn1.f5demo.local => app1-svc
-fqdn2.f5demo.local => app2-svc
+
+*fqdn1.f5demo.local => app1-svc*
+
+*fqdn2.f5demo.local => app2-svc*
 
 Create the Ingress resource
 ```
@@ -17,15 +19,15 @@ You should see the following output. Notice that the value of Host is now define
 
 ![fqdn-based-routing](images/fqdn-based-routing.png)
 
-Try accessing the service with the use of curl on the IP address assigned for the ingress. 
+Try accessing the service with the IP address assigned for the ingress as per the example below. 
 ```
-curl http://10.1.10.14
+curl http://10.1.10.50
 ```
 
 You should see a reset connection as it didnt match the configured Host Header.
+`curl: (56) Recv failure: Connection reset by peer`
 
-Try again with either of the 2 following options
-
+Try again with either of the two following options
 ```
 curl http://fqdn1.f5demo.local/ --resolve fqdn1.f5demo.local:80:10.1.10.50
 curl http://fqdn2.f5demo.local/ --resolve fqdn2.f5demo.local:80:10.1.10.50

@@ -1,7 +1,9 @@
 # FanOut/Path-Based-Routing
-The following example deploys an Ingress resource that routes based on URL Path:
-fanout.f5demo.local/__app2__ => app2-svc
-fanout.f5demo.local/__app1__ => app1-svc
+In the following example we deploy an Ingress resource that routes based on URL Path:
+
+*fanout.f5demo.local/__app2__ => app2-svc* 
+
+*fanout.f5demo.local/__app1__ => app1-svc*
 
 Create the Ingress resource
 ```
@@ -17,12 +19,14 @@ Notice on the output that the value of Host is now defined "fanout.f5demo.local"
 
 ![fanout-output](images/fanout.png)
 
-Try accessing the service on a path that has not been defined on the Ingress resource.
+Try accessing the service on a path that has not been defined on the Ingress resource like the example below.
 
 ```
 curl http://fanout.f5demo.local/test/index.php --resolve fanout.f5demo.local:80:10.1.10.50
 ```
 You should see a reset connection as it didnt match the configured Path value.
+`curl: (56) Recv failure: Connection reset by peer`
+
 
 Try again with either of the following options
 ```

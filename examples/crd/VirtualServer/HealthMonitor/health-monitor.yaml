@@ -1,28 +1,28 @@
 apiVersion: "cis.f5.com/v1"
 kind: VirtualServer
 metadata:
-  name: tea-virtual-server
+  name: health-virtual-server
   labels:
     f5cr: "true"
 spec:
-  virtualServerAddress: "10.1.10.60"
+  virtualServerAddress: "10.1.10.110"
   host: health.f5demo.local
   pools:
-  - path: /foo
+  - path: /app1
     service: app1-svc
     servicePort: 8080
     monitor:
       type: http
-      send: “GET /rn”
-      recv: ""
-      interval: 10
-      timeout: 3
-  - path: /bar
-    service: echo-svc
+      send: “GET /app1/rn”
+      recv: "200-OK"
+      interval: 3
+      timeout: 10
+  - path: /app2
+    service: app2-svc
     servicePort: 80
     monitor:
       type: http
-      send: “GET /rn”
-      recv: ""
-      interval: 10
-      timeout: 3
+      send: “GET /app2/rn”
+      recv: "200-OK"
+      interval: 3
+      timeout: 10

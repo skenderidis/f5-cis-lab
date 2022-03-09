@@ -7,7 +7,7 @@ metadata:
 spec:
   # This is an insecure virtual, Please use TLSProfile to secure the virtual
   # check out tls examples to understand more.
-  virtualServerAddress: "10.1.10.70"
+  virtualServerAddress: "10.1.10.90"
   pools:
   - path: /
     service: echo-svc

@@ -6,7 +6,7 @@ metadata:
   labels:
     f5cr: "true"
 spec:
-  virtualServerAddress: "10.1.10.91"
+  virtualServerAddress: "10.1.10.92"
   host: rewrite.f5demo.local
   pools:
     - path: /lab

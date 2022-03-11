@@ -18,4 +18,3 @@ spec:
   - icmpEcho: "enable"
     arpEnabled: true
     routeAdvertisement: "all"
-    spanningEnabled: true

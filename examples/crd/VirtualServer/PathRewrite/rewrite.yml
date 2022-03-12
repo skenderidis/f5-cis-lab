@@ -1,4 +1,3 @@
----
 apiVersion: "cis.f5.com/v1"
 kind: VirtualServer
 metadata:
@@ -6,14 +5,15 @@ metadata:
   labels:
     f5cr: "true"
 spec:
-  virtualServerAddress: "10.1.10.92"
+  virtualServerAddress: "10.1.10.96"
+  virtualServerName: "rewrite-vs"
   host: rewrite.f5demo.local
   pools:
     - path: /lab
-      service: svc-1
-      servicePort: 80
+      service: app1-svc
+      servicePort: 8080
       rewrite: /laboratory
     - path: /lib
-      service: svc-2
-      servicePort: 80
+      service: app2-svc
+      servicePort: 8080
       rewrite: /library

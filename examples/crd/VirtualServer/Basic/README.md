@@ -12,7 +12,7 @@ In this section we provide 4 Virtual Server deployment examples
 
 This section demonstrates the deployment of a Basic Virtual Server without Host Parameter.
 
-Eg: health-vs
+Eg: noHost.yml
 ```yml
 apiVersion: "cis.f5.com/v1"
 kind: VirtualServer
@@ -32,7 +32,7 @@ Create the VS CRD resource.
 ```
 kubectl apply -f noHost.yml
 ```
-CIS will create a Virtual Server on BIG-IP with VIP "10.1.10.90" and attaches a policy which forwards the traffic to pool echo-svc when the uri path segment is******  /.   
+CIS will create a Virtual Server on BIG-IP with VIP "10.1.10.90" and attaches a policy which forwards all traffic to service echo-svc.   
 
 
 Confirm that the VS CRD is deployed correctly. You should see `Ok` under the Status column for the VirtualServer that was just deployed.
@@ -58,17 +58,17 @@ In all cases you should be able to access the service running in K8s.
 This section demonstrates the deployment of a Virtual Server with a single service as the pool.
 The virtual server should send traffic for all paths to the same pool.
 
-Eg: simple-vs
+Eg: virtual-single-pool.yml
 ```yml
 apiVersion: "cis.f5.com/v1"
 kind: VirtualServer
 metadata:
-  name: simple-vs
+  name: single-pool-vs
   labels:
     f5cr: "true"
 spec:
   host: app1.f5demo.local
-  virtualServerAddress: "10.1.10.90"
+  virtualServerAddress: "10.1.10.91"
   pools:
   - path: /
     service: echo-svc
@@ -77,7 +77,7 @@ spec:
 
 Create the VS CRD resource. 
 ```
-kubectl apply -f noHost.yml
+kubectl apply -f virtual-single-pool.yml
 ```
 CIS will create a Virtual Server on BIG-IP with VIP `10.1.10.90` and attaches a policy which forwards all traffic to pool echo-svc when the Host Header is equal to `app1.f5demo.local`.   
 
@@ -89,9 +89,8 @@ kubectl get vs
 
 Try accessing the service with curl as per the examples below. 
 ```
-curl http://10.1.10.90
-curl http://10.1.10.90/test.php
-curl http://app5.f5demo.local --resolve app5.f5demo.local:80:10.1.10.90
+curl http://10.1.10.91
+curl http://app5.f5demo.local --resolve app5.f5demo.local:80:10.1.10.91
 ```
 
 In all the above examples you should see a reset connection as it didnt match the configured Host Header.
@@ -103,7 +102,7 @@ curl http://app1.f5demo.local --resolve app1.f5demo.local:80:10.1.10.90
 curl http://app1.f5demo.local/test --resolve app1.f5demo.local:80:10.1.10.90
 ```
 
-In all cases you should be able to access the service running in K8s.
+In both cases you should be able to access the service running in K8s.
 
 
 
@@ -112,7 +111,7 @@ In all cases you should be able to access the service running in K8s.
 This section demonstrates the deployment of a Virtual Server with 2 services as the pools.
 The virtual server should send traffic to the corresponding K8s service, according to the URI Path. In the following example traffic with URI Path `/lib` will be forwarded to service `app1-svc` while traffic with URI Path `/portal` will be forwarded to `app2-svc`. Traffic on all other URI Paths will be dropped. 
 
-Eg: two-pools-vs
+Eg: virtual-two-pools.yml
 
 ```yml
 apiVersion: "cis.f5.com/v1"
@@ -122,7 +121,7 @@ metadata:
   labels:
     f5cr: "true"
 spec:
-  virtualServerAddress: "10.1.10.94"
+  virtualServerAddress: "10.1.10.92"
   host: pools.f5demo.local
   pools:
   - path: /svc1
@@ -137,7 +136,7 @@ Create the VS CRD resource.
 ```
 kubectl apply -f virtual-two-pools.yml
 ```
-CIS will create a Virtual Server on BIG-IP with VIP `10.1.10.94` and attaches a policy which forwards traffic to service app1-svc or app2-svc depending on the URI path.   
+CIS will create a Virtual Server on BIG-IP with VIP `10.1.10.92` and attaches a policy which forwards traffic to service app1-svc or app2-svc depending on the URI path.   
 
 
 Confirm that the VS CRD is deployed correctly. You should see `Ok` under the Status column for the VirtualServer that was just deployed.
@@ -147,7 +146,7 @@ kubectl get vs
 
 Try accessing the service with curl as per the examples below. 
 ```
-curl http://pools.f5demo.local/ --resolve pools.f5demo.local:80:10.1.10.94
+curl http://pools.f5demo.local/ --resolve pools.f5demo.local:80:10.1.10.92
 
 ```
 In the above example you should see a reset connection as it didnt match the configured URI Path.
@@ -157,11 +156,11 @@ In the above example you should see a reset connection as it didnt match the con
 
 Try again with the examples below
 ```
-curl http://pools.f5demo.local/svc1 --resolve pools.f5demo.local:80:10.1.10.94
-curl http://pools.f5demo.local/svc2 --resolve pools.f5demo.local:80:10.1.10.94
+curl http://pools.f5demo.local/svc1 --resolve pools.f5demo.local:80:10.1.10.92
+curl http://pools.f5demo.local/svc2 --resolve pools.f5demo.local:80:10.1.10.92
 ```
 
-Verify that you traffic was forwarded to the right service depending on the path that was entered.
+Verify that the traffic was forwarded to the right service depending on the path that was entered.
 
 
 
@@ -171,7 +170,7 @@ Verify that you traffic was forwarded to the right service depending on the path
 This section demonstrates the deployment of a Virtual Server with wildcard Host parameter.
 The virtual server should send traffic to the backend service if the Host Header matches the wildcard value configured on the Host parameter.
 
-Eg: wildcard-vs
+Eg: virtual-wildcardhost.yml
 
 ```yml
 apiVersion: "cis.f5.com/v1"
@@ -181,22 +180,19 @@ metadata:
   labels:
     f5cr: "true"
 spec:
-  virtualServerAddress: "10.1.10.95"
+  virtualServerAddress: "10.1.10.93"
   host: "*.f5demo.local"
   pools:
-  - path: /svc1
-    service: app1-svc
-    servicePort: 8080
-  - path: /svc2
-    service: app2-svc
-    servicePort: 8080    
+  - path: /
+    service: echo-svc
+    servicePort: 80
 ```
 
 Create the VS CRD resource. 
 ```
-kubectl apply -f virtual-two-pools.yml
+kubectl apply -f virtual-wildcardhost.yml
 ```
-CIS will create a Virtual Server on BIG-IP with VIP `10.1.10.95` and attaches a policy which forwards traffic to service `echo-svc` if the Host Header matches `*.f5demo.local`.   
+CIS will create a Virtual Server on BIG-IP with VIP `10.1.10.93` and attaches a policy which forwards traffic to service `echo-svc` if the Host Header matches `*.f5demo.local`.   
 
 
 Confirm that the VS CRD is deployed correctly. You should see `Ok` under the Status column for the VirtualServer that was just deployed.
@@ -206,7 +202,7 @@ kubectl get vs
 
 Try accessing the service with curl as per the examples below. 
 ```
-curl http://test.example.local/ --resolve test.example.local:80:10.1.10.95
+curl http://test.example.local/ --resolve test.example.local:80:10.1.10.93
 
 ```
 In the above example you should see a reset connection as it didnt match the configured Host parameter.
@@ -215,11 +211,11 @@ In the above example you should see a reset connection as it didnt match the con
 
 Try again with the examples below
 ```
-curl http://test1.f5demo.local/ --resolve test1.f5demo.local:80:10.1.10.95
-curl http://test2.f5demo.local/ --resolve test2.f5demo.local:80:10.1.10.95
+curl http://test1.f5demo.local/ --resolve test1.f5demo.local:80:10.1.10.93
+curl http://test2.f5demo.local/ --resolve test2.f5demo.local:80:10.1.10.93
 ...
 ...
-curl http://test10.f5demo.local/ --resolve test10.f5demo.local:80:10.1.10.95
+curl http://test10.f5demo.local/ --resolve test10.f5demo.local:80:10.1.10.93
 
 ```
 

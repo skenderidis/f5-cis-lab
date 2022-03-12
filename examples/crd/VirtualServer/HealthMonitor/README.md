@@ -12,7 +12,7 @@ metadata:
   labels:
     f5cr: "true"
 spec:
-  virtualServerAddress: "10.1.10.93"
+  virtualServerAddress: "10.1.10.94"
   host: health.f5demo.local
   pools:
   - path: /app1
@@ -20,8 +20,8 @@ spec:
     servicePort: 8080
     monitor:
       type: http
-      send: “GET /app1/rn”
-      recv: "200-OK"
+      send: "GET /app1/index.html HTTP/1.1\r\nHost: health.f5demo.local\r\nConnection: Close\r\n\r\n"
+      recv: "200 OK"
       interval: 3
       timeout: 10
   - path: /app2
@@ -29,8 +29,8 @@ spec:
     servicePort: 8080
     monitor:
       type: http
-      send: “GET /app2/rn”
-      recv: "200-OK"
+      send: "GET /app2/index.html HTTP/1.1\r\nHost: health.f5demo.local\r\nConnection: Close\r\n\r\n"
+      recv: "200 OK"
       interval: 3
       timeout: 10
 ```

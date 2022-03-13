@@ -163,8 +163,6 @@ curl http://pools.f5demo.local/svc2 --resolve pools.f5demo.local:80:10.1.10.92
 Verify that the traffic was forwarded to the right service depending on the path that was entered.
 
 
-
-
 ## Create a HTTP Virtual Server with wildcard Host parameter.
 
 This section demonstrates the deployment of a Virtual Server with wildcard Host parameter.
@@ -220,3 +218,4 @@ curl http://test10.f5demo.local/ --resolve test10.f5demo.local:80:10.1.10.93
 ```
 
 Verify that you traffic was forwarded to the `echo-svc` service on both tests.
+

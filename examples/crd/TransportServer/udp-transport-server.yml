@@ -6,20 +6,12 @@ metadata:
   name: svc1-udp-transport-server
   namespace: default
 spec:
-  virtualServerAddress: "172.16.3.10"
+  virtualServerAddress: "10.1.10.112"
   virtualServerPort: 8444
   virtualServerName: svc1-udp-ts
   type: udp
   mode: standard
   snat: auto
-  allowVlans: ["/Common/devtraffic"]
-  persistenceProfile: "cookie"
-  iRules:
-    - /Common/custom_irule
   pool:
-    service: svc-1
+    service: udp-svc
     servicePort: 8182
-    monitor:
-      type: udp
-      interval: 10
-      timeout: 10

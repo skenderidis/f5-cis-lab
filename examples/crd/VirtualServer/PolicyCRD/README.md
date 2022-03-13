@@ -37,7 +37,7 @@ spec:
     servicePort: 80
 ```
 
-Create the PolicyCRD and VirtualServerCRD resource.
+Create the PolicyCRD and VirtualServerCRD resources.
 ```
 kubectl apply -f xff-policy.yml
 kubectl apply -f vs-with-policy-xff.yml

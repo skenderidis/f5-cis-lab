@@ -2,22 +2,22 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.6.0
+    controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: virtualservers.k8s.nginx.org
+  name: virtualserverroutes.k8s.nginx.org
 spec:
   group: k8s.nginx.org
   names:
-    kind: VirtualServer
-    listKind: VirtualServerList
-    plural: virtualservers
+    kind: VirtualServerRoute
+    listKind: VirtualServerRouteList
+    plural: virtualserverroutes
     shortNames:
-      - vs
-    singular: virtualserver
+      - vsr
+    singular: virtualserverroute
   scope: Namespaced
   versions:
     - additionalPrinterColumns:
-        - description: Current state of the VirtualServer. If the resource has a valid status, it means it has been validated and accepted by the Ingress Controller.
+        - description: Current state of the VirtualServerRoute. If the resource has a valid status, it means it has been validated and accepted by the Ingress Controller.
           jsonPath: .status.state
           name: State
           type: string
@@ -36,7 +36,7 @@ spec:
       name: v1
       schema:
         openAPIV3Schema:
-          description: VirtualServer defines the VirtualServer resource.
+          description: VirtualServerRoute defines the VirtualServerRoute resource.
           type: object
           properties:
             apiVersion:
@@ -48,26 +48,14 @@ spec:
             metadata:
               type: object
             spec:
-              description: VirtualServerSpec is the spec of the VirtualServer resource.
+              description: VirtualServerRouteSpec is the spec of the VirtualServerRoute resource.
               type: object
               properties:
                 host:
                   type: string
-                http-snippets:
-                  type: string
                 ingressClassName:
                   type: string
-                policies:
-                  type: array
-                  items:
-                    description: PolicyReference references a policy by name and an optional namespace.
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                      namespace:
-                        type: string
-                routes:
+                subroutes:
                   type: array
                   items:
                     description: Route defines a route.
@@ -149,6 +137,8 @@ spec:
                                 type: integer
                               type:
                                 type: string
+                      dos:
+                        type: string
                       errorPages:
                         type: array
                         items:
@@ -469,24 +459,6 @@ spec:
                                       type: string
                             weight:
                               type: integer
-                server-snippets:
-                  type: string
-                tls:
-                  description: TLS defines TLS configuration for a VirtualServer.
-                  type: object
-                  properties:
-                    redirect:
-                      description: TLSRedirect defines a redirect for a TLS.
-                      type: object
-                      properties:
-                        basedOn:
-                          type: string
-                        code:
-                          type: integer
-                        enable:
-                          type: boolean
-                    secret:
-                      type: string
                 upstreams:
                   type: array
                   items:
@@ -521,6 +493,10 @@ spec:
                             type: boolean
                           fails:
                             type: integer
+                          grpcService:
+                            type: string
+                          grpcStatus:
+                            type: integer
                           headers:
                             type: array
                             items:
@@ -535,10 +511,14 @@ spec:
                             type: string
                           jitter:
                             type: string
+                          mandatory:
+                            type: boolean
                           passes:
                             type: integer
                           path:
                             type: string
+                          persistent:
+                            type: boolean
                           port:
                             type: integer
                           read-timeout:
@@ -569,6 +549,8 @@ spec:
                         type: string
                       next-upstream-tries:
                         type: integer
+                      ntlm:
+                        type: boolean
                       port:
                         type: integer
                       queue:
@@ -615,10 +597,12 @@ spec:
                         properties:
                           enable:
                             type: boolean
+                      type:
+                        type: string
                       use-cluster-ip:
                         type: boolean
             status:
-              description: VirtualServerStatus defines the status for the VirtualServer resource.
+              description: VirtualServerRouteStatus defines the status for the VirtualServerRoute resource.
               type: object
               properties:
                 externalEndpoints:
@@ -634,6 +618,8 @@ spec:
                 message:
                   type: string
                 reason:
+                  type: string
+                referencedBy:
                   type: string
                 state:
                   type: string

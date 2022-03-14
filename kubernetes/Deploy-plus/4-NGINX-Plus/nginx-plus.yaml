@@ -2,9 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-plus
-  namespace: nginx-ingress
+  namespace: nginx
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: nginx-plus
@@ -12,16 +12,16 @@ spec:
     metadata:
       labels:
         app: nginx-plus
-      #annotations:
-      #  prometheus.io/scrape: "true"
-      #  prometheus.io/port: "9113"
-      #  prometheus.io/scheme: http
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9113"
+        prometheus.io/scheme: http
     spec:
       serviceAccountName: nginx-ingress
       imagePullSecrets:
       - name: regcred
       containers:
-      - image: private-registry.nginx.com/nginx-ic-nap/nginx-plus-ingress:2.0.3
+      - image: private-registry.nginx.com/nginx-ic-nap/nginx-plus-ingress:2.1.1
         imagePullPolicy: IfNotPresent
         name: nginx-plus
         ports:
@@ -31,8 +31,8 @@ spec:
           containerPort: 443
         - name: readiness-port
           containerPort: 8081
-        #- name: prometheus
-        #  containerPort: 9113
+        - name: prometheus
+          containerPort: 9113
         readinessProbe:
           httpGet:
             path: /nginx-ready
@@ -60,9 +60,9 @@ spec:
           - -nginx-configmaps=$(POD_NAMESPACE)/nginx-config
           - -default-server-tls-secret=$(POD_NAMESPACE)/default-server-secret
           - -ingress-class=nginx-plus
-         #- -enable-app-protect
+          - -enable-app-protect
          #- -v=3 # Enables extensive logging. Useful for troubleshooting.
-         #- -report-ingress-status
+          - -report-ingress-status
          #- -external-service=nginx-ingress
-         #- -enable-prometheus-metrics
+          - -enable-prometheus-metrics
          #- -global-configuration=$(POD_NAMESPACE)/nginx-configuration

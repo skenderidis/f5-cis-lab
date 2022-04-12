@@ -2,9 +2,9 @@
 
 In this section we provide 4 Virtual Server deployment examples
 
-- [TLS Ingress (certificate on K8s)](#tls-ingress-certificate-on-k8s)
-- [TLS Ingress (certificate on BIGIP)](#tls-ingress-certificate-on-bigip)
-- [Multi-TLS Ingress (certificate on BIGIP)](#multi-tls-ingress-certificate-on-bigip)
+- [Create a simple HTTP Virtual Server without Host parameter](#create-a-simple-http-virtual-server-without-host-parameter)
+- [Create a simple HTTP Virtual Server with Host parameter and a single pool](#create-a-simple-http-virtual-server-with-host-parameter-and-a-single-pool)
+- [Create a simple HTTP Virtual Server with Host parameter and two pools](#create-a-simple-http-virtual-server-with-host-parameter-and-two-pools)
 
 
 

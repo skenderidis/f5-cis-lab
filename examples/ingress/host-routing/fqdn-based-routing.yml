@@ -30,7 +30,7 @@ spec:
    http:
      # path to Service from URL
      paths:
-       - path: /test
+       - path: /
          pathType: Prefix
          backend:
            service:

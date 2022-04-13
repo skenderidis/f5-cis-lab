@@ -1,0 +1,15 @@
+apiVersion: cis.f5.com/v1
+kind: TLSProfile
+metadata:
+  name: reencrypt-tls
+  labels:
+    f5cr: "true"
+  namespace: nginx
+spec:
+  hosts:
+    - reencrypt.f5demo.local
+  tls:
+    termination: reencrypt
+    clientSSL: /Common/clientssl
+    serverSSL: /Common/serverssl
+    reference: bigip

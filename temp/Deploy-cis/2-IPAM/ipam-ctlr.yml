@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: f5ipam
+  name: f5ipam
+  namespace: kube-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: f5ipam
+  template:
+    metadata:
+      labels:
+        app: f5ipam
+    spec:
+      containers:
+      - args:
+        - --orchestration=kubernetes
+        - --ip-range='{"Dev":"172.16.3.21-172.16.3.30","Prod":"172.16.3.31-172.16.3.40"}'
+        - --log-level=DEBUG
+        command:
+        - /app/bin/f5-ipam-controller
+        image: f5networks/f5-ipam-controller:0.1.6
+        imagePullPolicy: IfNotPresent
+        name: f5-ipam-controller
+        terminationMessagePath: /dev/termination-log
+        volumeMounts:
+        - mountPath: /app/ipamdb
+          name: samplevol
+      securityContext:
+        fsGroup: 1200
+        runAsGroup: 1200
+        runAsUser: 1200
+      serviceAccount: bigip-ctlr
+      serviceAccountName: bigip-ctlr
+      volumes:
+      - name: samplevol
+        persistentVolumeClaim:
+          claimName: pvc-local
+          
